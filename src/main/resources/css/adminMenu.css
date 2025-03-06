@@ -1,0 +1,83 @@
+.main_menu_container {
+    -fx-background-color: #1e1e1e; /* Dark background */
+    -fx-padding: 20;
+}
+
+.menu_title {
+    -fx-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+}
+
+.admin_label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #bbbbbb;
+    -fx-alignment: center;
+    -fx-padding: 10 0 20 0;
+}
+
+.menu_container {
+    -fx-spacing: 40;
+}
+
+.menu_button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-pref-width: 240px; /* Makes sure the buttons stretch */
+    -fx-pref-height: 50px; /* Adjust height if needed */
+    -fx-padding: 10;
+}
+
+.menu_button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu_button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Slightly brighter press effect */
+    -fx-text-fill: #dddddd; /* Slightly lighter text */
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.button-selected {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Slightly brighter press effect */
+    -fx-text-fill: #dddddd; /* Slightly lighter text */
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.button-selected:hover{
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+.signout_button {
+    -fx-background-color: #d32f2f; /* A strong red */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-padding: 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+}
+
+.signout_button:hover {
+    -fx-background-color: #b71c1c; /* A darker red on hover */
+}
+
+.signout_button:pressed {
+    -fx-background-color: #9a0007; /* Even darker red when clicked */
+}
+
+.icon {
+    -fx-fill: white;
+    -fx-opacity: 0.8;
+}

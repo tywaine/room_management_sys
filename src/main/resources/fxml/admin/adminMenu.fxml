@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="900.0" prefWidth="250.0" styleClass="main_menu_container" stylesheets="@../../css/adminMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hallmanagementsys.hallmanagement.controller.admin.AdminMenuController">
+
+    <children>
+        <!-- Title -->
+        <Text styleClass="menu_title" text="Room Inventory Management" textOrigin="CENTER" wrappingWidth="220.0" />
+
+        <!-- Admin Label -->
+        <Label alignment="CENTER" prefHeight="109.0" prefWidth="220.0" styleClass="admin_label" text="ADMIN" textFill="#bbbbbb" />
+
+        <!-- Menu Buttons -->
+        <VBox prefHeight="413.0" prefWidth="220.0" spacing="10.0" styleClass="menu_container">
+            <children>
+                <Button fx:id="btnRooms" prefWidth="220.0" styleClass="menu_button" text="Display Rooms" />
+                <Button fx:id="btnFurniture" styleClass="menu_button" text="View Furniture" />
+                <Button fx:id="btnOccupants" styleClass="menu_button" text="Manage Occupants" />
+                <Button fx:id="btnReport" prefHeight="38.0" prefWidth="225.0" styleClass="menu_button" text="Generate Report" />
+                <Button fx:id="btnAccount" prefWidth="89.0" styleClass="menu_button" text="Account" />
+            </children>
+        </VBox>
+        <AnchorPane prefHeight="303.0" prefWidth="220.0">
+            <children>
+
+                <!-- Sign Out Button -->
+                <Button fx:id="btnSignOut" layoutY="247.0" prefWidth="109.0" styleClass="signout_button" text="Sign Out" />
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
