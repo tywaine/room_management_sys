@@ -6,7 +6,6 @@ import com.hallmanagementsys.hallmanagement.controller.staff.StaffController;
 import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
 import com.hallmanagementsys.hallmanagement.enums.StaffMenuOptions;
 import com.hallmanagementsys.hallmanagement.service.UserService;
-import com.hallmanagementsys.hallmanagement.util.Css;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -146,7 +145,7 @@ public class ViewFactory {
                         Since there is no user registered in the system you will create an Account.
                         Make sure to remember the details.
                         You will need them to login. THERE IS NO RECOVERY SYSTEM (As of now)
-                        You can change the password later if you like""");
+                        """);
     }
 
     public void showLoginWindow(){

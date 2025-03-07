@@ -9,17 +9,19 @@ import java.util.Map;
 public class HttpRequestUtil {
 
     private static final HttpClient client = HttpClient.newHttpClient();
-
-    /**
-     * Generic method to send HTTP requests (GET, POST, PUT, DELETE).
-     *
-     * @param method The HTTP method (GET, POST, PUT, DELETE)
-     * @param url The URL for the request
-     * @param body The request body (optional, for POST and PUT requests)
-     * @param headers The request headers (optional)
-     * @return The HTTP response
-     */
     public static HttpResponse<String> sendRequest(String method, String url, Map<String, String> headers, String body) {
+        return getRequest(method, url, headers, body);
+    }
+
+    public static HttpResponse<String> sendRequest(String method, String url, Map<String, String> headers) {
+        return getRequest(method, url, headers, null);
+    }
+
+    public static HttpResponse<String> sendRequest(String method, String url) {
+        return getRequest(method, url, null, null);
+    }
+
+    private static HttpResponse<String> getRequest(String method, String url, Map<String, String> headers, String body) {
         try {
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(URI.create(url));
@@ -43,55 +45,6 @@ public class HttpRequestUtil {
             // Add headers if provided
             if (headers != null && !headers.isEmpty()) {
                 headers.forEach(requestBuilder::header);
-            }
-
-            HttpRequest request = requestBuilder.build();
-            return client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static HttpResponse<String> sendRequest(String method, String url, Map<String, String> headers) {
-        try {
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(URI.create(url));
-
-            // Set HTTP method (GET, DELETE)
-            if (method.equalsIgnoreCase("DELETE")) {
-                requestBuilder.DELETE();
-            }
-            else {
-                requestBuilder.GET();
-            }
-
-            // Add headers if provided
-            if (headers != null && !headers.isEmpty()) {
-                headers.forEach(requestBuilder::header);
-            }
-
-            HttpRequest request = requestBuilder.build();
-            return client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static HttpResponse<String> sendRequest(String method, String url) {
-        try {
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(URI.create(url));
-
-            // Set HTTP method (GET, DELETE)
-            if (method.equalsIgnoreCase("DELETE")) {
-                requestBuilder.DELETE();
-            }
-            else {
-                requestBuilder.GET();
             }
 
             HttpRequest request = requestBuilder.build();
