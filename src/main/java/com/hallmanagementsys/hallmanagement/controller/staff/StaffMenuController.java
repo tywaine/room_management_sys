@@ -67,9 +67,9 @@ public class StaffMenuController implements Initializable {
     private void onSignOut(){
         Stage stage = (Stage) btnOccupants.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(stage);
-        Model.getInstance().resetViewFactory();
         LoginController.removeCredentials();
         Model.getInstance().emptyData();
+        Model.getInstance().getViewFactory().resetStaffViews();
         Model.getInstance().getViewFactory().showLoginWindow();
     }
 }

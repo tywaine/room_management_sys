@@ -24,8 +24,6 @@ public class Furniture {
         setFurnitureCondition(furnitureCondition);
 
         addFurniture(this);
-
-        Room.getRoom(roomID).addFurniture(this);
     }
 
 
@@ -131,6 +129,11 @@ public class Furniture {
             if(!containsFurniture(furniture.getID())){
                 Furniture.furniture.put(furniture.getID(), furniture);
                 furnitureList.add(furniture);
+                Room room = Room.getRoom(furniture.getRoomID());
+
+                if(Room.isValidRoom(room)){
+                    room.addFurniture(furniture);
+                }
             }
             else{
                 System.out.println("Furniture is already present!");
@@ -150,9 +153,14 @@ public class Furniture {
     }
 
     public static void removeFurniture(Furniture furniture) {
-        if(validFurniture(furniture)){
+        if(isValidFurniture(furniture)){
             furnitureList.remove(furniture);
             Furniture.furniture.remove(furniture.getID());
+            Room room = Room.getRoom(furniture.getRoomID());
+
+            if(Room.isValidRoom(room)){
+                room.removeFurniture(furniture);
+            }
         }
         else{
             System.out.println("Furniture ID not found");
@@ -169,7 +177,7 @@ public class Furniture {
         }
     }
 
-    public static boolean validFurniture(Furniture furniture) {
+    public static boolean isValidFurniture(Furniture furniture) {
         return furniture != null && containsFurniture(furniture.getID());
     }
 

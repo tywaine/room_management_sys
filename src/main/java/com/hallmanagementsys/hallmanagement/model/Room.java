@@ -232,7 +232,7 @@ public class Room {
     }
 
     public static void removeRoom(Room room) {
-        if(validRoom(room)){
+        if(isValidRoom(room)){
             roomList.remove(room);
             rooms.remove(room.getID());
         }
@@ -251,7 +251,7 @@ public class Room {
         }
     }
 
-    public static boolean validRoom(Room room) {
+    public static boolean isValidRoom(Room room) {
         return room != null && containsRoom(room.getID());
     }
 

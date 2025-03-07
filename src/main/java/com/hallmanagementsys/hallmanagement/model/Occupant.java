@@ -52,8 +52,6 @@ public class Occupant {
         setDateAdded(dateAdded);
 
         addOccupant(this);
-
-        Room.getRoom(roomID).addOccupant(this);
     }
 
     // Properties
@@ -210,6 +208,11 @@ public class Occupant {
             if(!containsOccupant(occupant.getID())){
                 occupants.put(occupant.getID(), occupant);
                 occupantList.add(occupant);
+                Room room = Room.getRoom(occupant.getRoomID());
+
+                if(Room.isValidRoom(room)){
+                    room.addOccupant(occupant);
+                }
             }
             else{
                 System.out.println("Occupant is already present!");
@@ -232,9 +235,14 @@ public class Occupant {
     }
 
     public static void removeOccupant(Occupant occupant) {
-        if(validOccupant(occupant)){
+        if(isValidOccupant(occupant)){
             occupantList.remove(occupant);
             occupants.remove(occupant.getID());
+            Room room = Room.getRoom(occupant.getRoomID());
+
+            if(Room.isValidRoom(room)){
+                room.removeOccupant(occupant);
+            }
         }
         else{
             System.out.println("Occupant ID not found");
@@ -251,7 +259,7 @@ public class Occupant {
         }
     }
 
-    public static boolean validOccupant(Occupant occupant) {
+    public static boolean isValidOccupant(Occupant occupant) {
         return occupant != null && containsOccupant(occupant.getID());
     }
 

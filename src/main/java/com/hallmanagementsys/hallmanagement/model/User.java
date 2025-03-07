@@ -247,7 +247,7 @@ public class User {
     }
 
     public static void removeStaff(User staff) {
-        if(validStaff(staff)){
+        if(isValidStaff(staff)){
             staffList.remove(staff);
             staffs.remove(staff.getID());
         }
@@ -266,7 +266,7 @@ public class User {
         }
     }
 
-    public static boolean validStaff(User staff){
+    public static boolean isValidStaff(User staff){
         return staff != null && containsStaff(staff.getID());
     }
 

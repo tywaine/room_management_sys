@@ -137,7 +137,7 @@ public class Block {
     }
 
     public static void removeBlock(Block block) {
-        if(validBlock(block)){
+        if(isValidBlock(block)){
             blockList.remove(block);
             blocks.remove(block.getID());
         }
@@ -156,7 +156,7 @@ public class Block {
         }
     }
 
-    public static boolean validBlock(Block block) {
+    public static boolean isValidBlock(Block block) {
         return block != null && containsBlock(block.getID());
     }
 

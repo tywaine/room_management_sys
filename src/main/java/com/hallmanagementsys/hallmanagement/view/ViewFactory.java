@@ -108,6 +108,22 @@ public class ViewFactory {
         return viewFurnitureView;
     }
 
+    public void resetAdminViews(){
+        displayRoomsView = null;
+        viewFurnitureView = null;
+        manageOccupantsView = null;
+        generateReportView = null;
+        accountView = null;
+    }
+
+    public void resetStaffViews(){
+        displayRoomsView = null;
+        viewFurnitureView = null;
+        manageOccupantsView = null;
+        generateReportView = null;
+        accountView = null;
+    }
+
     public void showAdminWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/admin.fxml"));
         AdminController adminController = new AdminController();

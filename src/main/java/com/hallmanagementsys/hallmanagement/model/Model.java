@@ -36,10 +36,6 @@ public class Model {
         return viewFactory;
     }
 
-    public void resetViewFactory(){
-        viewFactory = new ViewFactory();
-    }
-
     public void loadStaticData(Runnable onComplete){
         Task<Void> task = new Task<>() {
             @Override
