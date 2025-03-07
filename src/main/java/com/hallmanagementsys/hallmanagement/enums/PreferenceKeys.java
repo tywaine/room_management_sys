@@ -1,8 +1,5 @@
 package com.hallmanagementsys.hallmanagement.enums;
 
-import lombok.Getter;
-
-@Getter
 public enum PreferenceKeys {
     USER_USERNAME("HallManagementSystem_UserEmail"),
     USER_PASSWORD("HallManagementSystem_UserPassword");
@@ -10,6 +7,10 @@ public enum PreferenceKeys {
 
     PreferenceKeys(String key) {
         this.key = key;
+    }
+
+    public String getKey() {
+        return key;
     }
 
 }

@@ -1,15 +1,40 @@
 package com.hallmanagementsys.hallmanagement.dto.msg;
 
 import com.hallmanagementsys.hallmanagement.dto.FurnitureDTO;
-import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class FurnitureUpdateMessage {
     private FurnitureDTO furniture;
     private String status; // ADD, UPDATE
 
+    public FurnitureUpdateMessage() {
+    }
+
+    public FurnitureUpdateMessage(FurnitureDTO furniture, String status) {
+        this.furniture = furniture;
+        this.status = status;
+    }
+
+    public FurnitureDTO getFurniture() {
+        return furniture;
+    }
+
+    public void setFurniture(FurnitureDTO furniture) {
+        this.furniture = furniture;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "FurnitureUpdateMessage{" +
+                "furniture=" + furniture +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

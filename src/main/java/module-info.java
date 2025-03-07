@@ -5,14 +5,11 @@ module com.hallmanagementsys.hallmanagement {
     requires jbcrypt;
     requires java.prefs;
     requires de.jensd.fx.glyphs.fontawesome;
-    requires jakarta.mail;
-    requires jakarta.activation;
     requires com.github.librepdf.openpdf;
 
     requires org.kordamp.bootstrapfx.core;
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.fasterxml.jackson.databind;
-    requires static lombok;
     requires spring.messaging;
     requires spring.websocket;
     requires spring.core;
