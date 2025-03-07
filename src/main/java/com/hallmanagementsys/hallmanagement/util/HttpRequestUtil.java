@@ -10,18 +10,18 @@ public class HttpRequestUtil {
 
     private static final HttpClient client = HttpClient.newHttpClient();
     public static HttpResponse<String> sendRequest(String method, String url, Map<String, String> headers, String body) {
-        return getRequest(method, url, headers, body);
+        return getResponse(method, url, headers, body);
     }
 
     public static HttpResponse<String> sendRequest(String method, String url, Map<String, String> headers) {
-        return getRequest(method, url, headers, null);
+        return getResponse(method, url, headers, null);
     }
 
     public static HttpResponse<String> sendRequest(String method, String url) {
-        return getRequest(method, url, null, null);
+        return getResponse(method, url, null, null);
     }
 
-    private static HttpResponse<String> getRequest(String method, String url, Map<String, String> headers, String body) {
+    private static HttpResponse<String> getResponse(String method, String url, Map<String, String> headers, String body) {
         try {
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(URI.create(url));
