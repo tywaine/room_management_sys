@@ -2,6 +2,7 @@ package com.hallmanagementsys.hallmanagement.controller;
 
 import com.hallmanagementsys.hallmanagement.dto.FurnitureDTO;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
+import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Room;
 import com.hallmanagementsys.hallmanagement.service.FurnitureService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
@@ -61,7 +62,6 @@ public class ViewFurnitureController implements Initializable {
     }
 
     private void setupListView() {
-        // Set up the cell factory to display room numbers
         listViewRooms.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(Room room, boolean empty) {
@@ -97,11 +97,11 @@ public class ViewFurnitureController implements Initializable {
             if (searchText.isEmpty()) {
                 return true;
             }
-            return room.getRoomNumber().toUpperCase().contains(searchText);
+            return room.getRoomNumber().contains(searchText);
         });
     }
 
-    private void updateFurnitureList(Room selectedRoom) {
+    public void updateFurnitureList(Room selectedRoom) {
         if (selectedRoom != null) {
             furnitureList.setAll(selectedRoom.getFurnitureList());
             this.selectedRoom = selectedRoom;
@@ -157,6 +157,26 @@ public class ViewFurnitureController implements Initializable {
         });
     }
 
+    private void deleteFurniture(Furniture furniture) {
+        if (MyAlert.confirmationDialogAlertIsYes("Delete Furniture?",
+                "Are you sure you want to delete this Furniture type " + furniture.getFurnitureType() + ", with a "
+                        + furniture.getFurnitureCondition() + " condition from room " + selectedRoom.getRoomNumber() + "?")) {
+
+            if(furnitureService.deleteFurniture(furniture.getID())){
+                Furniture.removeFurniture(furniture);
+                furnitureList.remove(furniture);
+                MyAlert.showAlert(Alert.AlertType.INFORMATION, "Deleted Furniture",
+                        "Furniture type " + furniture.getFurnitureType() + ", in room " + selectedRoom.getRoomNumber() +
+                                " with a " + furniture.getFurnitureCondition() + " condition" + " has been deleted!!");
+            }
+            else{
+                MyAlert.showAlert(Alert.AlertType.ERROR, "Error deleting Furniture",
+                        "There was an error deleting Furniture type " + furniture.getFurnitureType() + ", with a "
+                                + furniture.getFurnitureCondition() + " condition from room " + selectedRoom.getRoomNumber() + ".");
+            }
+        }
+    }
+
     private void setupEditColumn() {
         columnEdit.setCellFactory(new Callback<>() {
             @Override
@@ -189,27 +209,14 @@ public class ViewFurnitureController implements Initializable {
         });
     }
 
-    private void deleteFurniture(Furniture furniture) {
-        if (MyAlert.confirmationDialogAlertIsYes("Delete Furniture?",
-                "Are you sure you want to delete this Furniture: " + furniture.getFurnitureType() + ", with a "
-                        + furniture.getFurnitureCondition() + " condition from room " + selectedRoom.getRoomNumber() + "?")) {
-
-            if(furnitureService.deleteFurniture(furniture.getID())){
-                Furniture.removeFurniture(furniture);
-                MyAlert.showAlert(Alert.AlertType.INFORMATION, "Deleted Furniture",
-                        "Furniture: " + furniture.getFurnitureType() + ", in room " + selectedRoom.getRoomNumber() +
-                                " with a " + furniture.getFurnitureCondition() + " condition" + " has been added!");
-            }
-            else{
-                MyAlert.showAlert(Alert.AlertType.ERROR, "Error deleting Furniture",
-                        "There was an error deleting Furniture: " + furniture.getFurnitureType() + ", with a "
-                                + furniture.getFurnitureCondition() + " condition from room " + selectedRoom.getRoomNumber() + ".");
-            }
-        }
-    }
-
     private void editFurniture(Furniture furniture) {
+        boolean success = Model.getInstance().getViewFactory().showEditFurnitureDialog(furniture);
 
+        if (success) {
+            MyAlert.showAlert(Alert.AlertType.INFORMATION, "Success",
+                    "Furniture updated successfully!");
+            updateFurnitureList(selectedRoom);
+        }
     }
 
     private void validateFields(){
@@ -245,12 +252,12 @@ public class ViewFurnitureController implements Initializable {
             furnitureList.add(furnitureService.createFurnitureAndRetrieve(furnitureDTO));
             txtFurnitureType.clear();
             MyAlert.showAlert(Alert.AlertType.INFORMATION, "Added Furniture",
-                    "Furniture: " + furnitureType + " with a " + furnitureCondition +
+                    "Furniture type " + furnitureType + " with a " + furnitureCondition +
                             " condition" + " has been added to room " + selectedRoom.getRoomNumber() + ".");
         }
         else{
             MyAlert.showAlert(Alert.AlertType.INFORMATION, "Error Adding Furniture",
-                    "Furniture: " + furnitureType + " with a " + furnitureCondition +
+                    "Furniture type " + furnitureType + " with a " + furnitureCondition +
                             " condition" + " was not added to room " + selectedRoom.getRoomNumber() + "!!!");
         }
     }

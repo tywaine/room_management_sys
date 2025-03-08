@@ -113,9 +113,12 @@ public class FurnitureService {
         return null;
     }
 
-    public boolean updateFurniture(Integer furnitureID, Integer roomID, String furnitureType, String furnitureCondition) {
+    public boolean updateFurniture(Furniture furniture) {
         try {
-            String updateUrl = baseUrl + "/update/" + furnitureID;
+            String updateUrl = baseUrl + "/update/" + furniture.getID();
+            Integer roomID = furniture.getRoomID();
+            String furnitureType = furniture.getFurnitureType();
+            String furnitureCondition = furniture.getFurnitureCondition();
 
             // Build the request body only with non-null parameters
             List<String> params = new ArrayList<>();

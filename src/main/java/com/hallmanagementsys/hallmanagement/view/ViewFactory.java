@@ -1,10 +1,13 @@
 package com.hallmanagementsys.hallmanagement.view;
 
+import com.hallmanagementsys.hallmanagement.controller.EditFurnitureController;
 import com.hallmanagementsys.hallmanagement.controller.LoginController;
 import com.hallmanagementsys.hallmanagement.controller.admin.AdminController;
 import com.hallmanagementsys.hallmanagement.controller.staff.StaffController;
 import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
 import com.hallmanagementsys.hallmanagement.enums.StaffMenuOptions;
+import com.hallmanagementsys.hallmanagement.model.Furniture;
+import com.hallmanagementsys.hallmanagement.service.FurnitureService;
 import com.hallmanagementsys.hallmanagement.service.UserService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
 import javafx.beans.property.ObjectProperty;
@@ -13,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
@@ -179,6 +183,35 @@ public class ViewFactory {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean showEditFurnitureDialog(Furniture furniture) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/editFurniture.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Furniture");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+
+            EditFurnitureController controller = loader.getController();
+            controller.setFurniture(furniture);
+
+            dialogStage.showAndWait();
+
+            if (controller.isSaveClicked()) {
+                return FurnitureService.getInstance().updateFurniture(furniture);
+            }
+
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            MyAlert.showAlert(Alert.AlertType.ERROR, "Error",
+                    "Could not load the edit dialog!");
+            return false;
         }
     }
 
