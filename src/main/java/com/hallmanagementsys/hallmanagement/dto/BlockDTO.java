@@ -9,11 +9,6 @@ public class BlockDTO {
 
     public BlockDTO() {}
 
-    public BlockDTO(Character name, Integer maxRooms) {
-        this.name = name;
-        this.maxRooms = maxRooms;
-    }
-
     public BlockDTO(Integer id, Character name, Integer maxRooms) {
         this.id = id;
         this.name = name;

@@ -16,35 +16,6 @@ public class OccupantDTO {
 
     public OccupantDTO(){}
 
-    public OccupantDTO(String firstName, String lastName, String idNumber, String email, String phoneNumber, Integer roomID, LocalDateTime dateAdded) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.idNumber = idNumber;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.roomID = roomID;
-        this.dateAdded = dateAdded;
-    }
-
-    public OccupantDTO(String firstName, String lastName, String idNumber, String email, String phoneNumber, Integer roomID) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.idNumber = idNumber;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.roomID = roomID;
-    }
-
-    public OccupantDTO(Integer id, String firstName, String lastName, String idNumber, String email, String phoneNumber, Integer roomID) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.idNumber = idNumber;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.roomID = roomID;
-    }
-
     public OccupantDTO(Integer id, String firstName, String lastName, String idNumber, String email, String phoneNumber, Integer roomID, LocalDateTime dateAdded) {
         this.id = id;
         this.firstName = firstName;

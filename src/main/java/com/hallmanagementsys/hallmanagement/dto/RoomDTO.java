@@ -11,13 +11,6 @@ public class RoomDTO {
 
     public RoomDTO(){}
 
-    public RoomDTO(Integer blockID, String roomNumber, Integer floor, Integer maxOccupants) {
-        this.blockID = blockID;
-        this.roomNumber = roomNumber;
-        this.floor = floor;
-        this.maxOccupants = maxOccupants;
-    }
-
     public RoomDTO(Integer id, Integer blockID, String roomNumber, Integer floor, Integer maxOccupants) {
         this.id = id;
         this.blockID = blockID;

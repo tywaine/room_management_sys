@@ -23,13 +23,6 @@ public class Room {
     private static final Map<Integer, Room> rooms = new HashMap<>();
     private static final ObservableList<Room> roomList = FXCollections.observableArrayList();
 
-    public Room(Integer blockID, String roomNumber, Integer floor, Integer maxOccupants) {
-        this.blockID.set(blockID);
-        this.roomNumber.set(roomNumber);
-        this.floor.set(floor);
-        this.maxOccupants.set(maxOccupants);
-    }
-
     public Room(Integer id, Integer blockID, String roomNumber, Integer floor, Integer maxOccupants) {
         this.id.set(id);
         this.blockID.set(blockID);

@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.hallmanagementsys.hallmanagement.controller.ViewFurnitureController"
-            prefHeight="900.0" prefWidth="1125.0">
+<AnchorPane prefHeight="900.0" prefWidth="1125.0" stylesheets="@../css/viewFurniture.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hallmanagementsys.hallmanagement.controller.ViewFurnitureController">
+
+    <HBox layoutX="10.0" layoutY="10.0" prefHeight="620.0" prefWidth="1108.0" spacing="10.0" AnchorPane.bottomAnchor="132.0" AnchorPane.rightAnchor="0.0">
+        <VBox spacing="5.0">
+            <!-- ListView for Room Numbers -->
+            <ListView fx:id="listViewRooms" prefHeight="610.0" prefWidth="120.0" />
+        </VBox>
+
+        <VBox prefHeight="586.0" prefWidth="977.0" spacing="10.0">
+
+            <!-- TableView for Furniture -->
+            <TableView fx:id="tableViewFurniture" prefHeight="686.0" prefWidth="977.0">
+                <columns>
+                    <TableColumn fx:id="columnFurnitureType" prefWidth="341.0" text="Furniture Type" />
+                    <TableColumn fx:id="columnFurnitureCondition" prefWidth="310.0" text="Furniture Condition" />
+                    <TableColumn fx:id="columnEdit" prefWidth="133.0" text="Edit" />
+               <TableColumn fx:id="columnDelete" prefWidth="155.0" text="Delete" />
+                </columns>
+            </TableView>
+
+            <!-- Input Fields and Buttons -->
+            <HBox spacing="10.0" />
+        </VBox>
+    </HBox>
+      <!-- Search Field for Furniture (Fixed Size) -->
+      <TextField fx:id="txtSearchFurniture" layoutX="851.0" layoutY="91.0" prefHeight="26.0" prefWidth="260.0" promptText="Search Furniture" />
+       <TextField fx:id="txtFurnitureType" layoutX="463.0" layoutY="800.0" prefWidth="200.0" promptText="Furniture Type" />
+       <Button fx:id="btnAddFurniture" layoutX="925.0" layoutY="802.0" onAction="#addFurniture" text="Add Furniture" />
+   <Label layoutX="465.0" layoutY="775.0" prefHeight="20.0" prefWidth="200.0" text="Furniture Type">
+      <font>
+         <Font name="System Bold Italic" size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="511.0" layoutY="14.0" text="Furniture">
+      <font>
+         <Font name="System Bold" size="32.0" />
+      </font>
+   </Label>
+   <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="857.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../img/searchgrey.png" />
+      </image>
+   </ImageView>
+      <!-- Search Field for Room Numbers (Fixed Size) -->
+      <TextField fx:id="txtSearchRoom" layoutX="14.0" layoutY="91.0" prefHeight="42.0" prefWidth="132.0" promptText="Search Room" />
+   <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="23.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../img/searchgrey.png" />
+      </image>
+   </ImageView>
+   <Label layoutX="715.0" layoutY="775.0" prefHeight="20.0" prefWidth="170.0" text="Furniture Condition">
+      <font>
+         <Font name="System Bold Italic" size="16.0" />
+      </font>
+   </Label>
+   <Label fx:id="lblTypeError" layoutX="463.0" layoutY="839.0" prefHeight="17.0" prefWidth="200.0" textFill="RED" />
+   <ChoiceBox fx:id="choiceBoxCondition" layoutX="712.0" layoutY="800.0" prefWidth="170.0" />
 
 </AnchorPane>

@@ -38,7 +38,6 @@ public class DisplayRoomsController implements Initializable {
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> filterRoomList());
     }
 
-
     public void filterRoomList(){
         String searchText = txtSearch.getText().toLowerCase().trim();
 

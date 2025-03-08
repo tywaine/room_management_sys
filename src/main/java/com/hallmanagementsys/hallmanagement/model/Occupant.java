@@ -22,25 +22,6 @@ public class Occupant {
     private static final Map<Integer, Occupant> occupants = new HashMap<>();
     private static final ObservableList<Occupant> occupantList = FXCollections.observableArrayList();
 
-    public Occupant(String firstName, String lastName, String idNumber, String email, String phoneNumber, Integer roomID) {
-        setFirstName(firstName);
-        setLastName(lastName);
-        setIdNumber(idNumber);
-        setEmail(email);
-        setPhoneNumber(phoneNumber);
-        setRoomID(roomID);
-    }
-
-    public Occupant(String firstName, String lastName, String idNumber, String email, String phoneNumber, Integer roomID, LocalDateTime dateAdded) {
-        setFirstName(firstName);
-        setLastName(lastName);
-        setIdNumber(idNumber);
-        setEmail(email);
-        setPhoneNumber(phoneNumber);
-        setRoomID(roomID);
-        setDateAdded(dateAdded);
-    }
-
     public Occupant(Integer id, String firstName, String lastName, String idNumber, String email, String phoneNumber, Integer roomID, LocalDateTime dateAdded) {
         this.id.set(id);
         setFirstName(firstName);

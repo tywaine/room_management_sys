@@ -10,12 +10,6 @@ public class FurnitureDTO {
 
     public FurnitureDTO() {}
 
-    public FurnitureDTO(Integer roomID, String furnitureType, String furnitureCondition) {
-        this.roomID = roomID;
-        this.furnitureType = furnitureType;
-        this.furnitureCondition = furnitureCondition;
-    }
-
     public FurnitureDTO(Integer id, Integer roomID, String furnitureType, String furnitureCondition) {
         this.id = id;
         this.roomID = roomID;
