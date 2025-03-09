@@ -24,9 +24,9 @@ public class AdminMenuController implements Initializable {
     }
 
     private void setIcons() {
-        btnOccupants.setGraphic(createFontIcon(FontAwesomeIcon.USER, 18)); // Occupants
-        btnFurniture.setGraphic(createFontIcon(FontAwesomeIcon.ARCHIVE, 18)); // Furniture
         btnRooms.setGraphic(createFontIcon(FontAwesomeIcon.HOME, 18)); // Room Management
+        btnFurniture.setGraphic(createFontIcon(FontAwesomeIcon.BED, 18)); // Furniture
+        btnOccupants.setGraphic(createFontIcon(FontAwesomeIcon.USERS, 18)); // Occupants
         btnReport.setGraphic(createFontIcon(FontAwesomeIcon.FILE_TEXT, 18)); // Reports
         btnAccount.setGraphic(createFontIcon(FontAwesomeIcon.USER_CIRCLE, 18)); // Account Settings
         btnSignOut.setGraphic(createFontIcon(FontAwesomeIcon.SIGN_OUT, 14)); // Sign Out

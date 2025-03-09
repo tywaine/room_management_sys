@@ -7,7 +7,6 @@ import com.hallmanagementsys.hallmanagement.model.Furniture;
 import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Room;
 import com.hallmanagementsys.hallmanagement.service.FurnitureService;
-import com.hallmanagementsys.hallmanagement.util.Json;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
 import com.hallmanagementsys.hallmanagement.websocket.MyWebSocketClient;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -31,7 +30,7 @@ public class ViewFurnitureController implements Initializable {
     public TableColumn<Furniture, Void> columnEdit;
     public TableColumn<Furniture, Void> columnDelete;
     public Button btnAddFurniture;
-    public TextField txtSearchRoom, txtSearchFurniture, txtFurnitureType;
+    public TextField txtSearchRoom, txtSearchFurniture, txtRoomNumber, txtFurnitureType;
     public Label lblTypeError;
     public ChoiceBox<String> choiceBoxCondition;
 
@@ -172,6 +171,7 @@ public class ViewFurnitureController implements Initializable {
             if (searchText.isEmpty()) {
                 return true;
             }
+
             return room.getRoomNumber().contains(searchText);
         });
     }
@@ -180,6 +180,7 @@ public class ViewFurnitureController implements Initializable {
         if (selectedRoom != null) {
             furnitureList.setAll(selectedRoom.getFurnitureList());
             this.selectedRoom = selectedRoom;
+            txtRoomNumber.setText(selectedRoom.getRoomNumber());
             validateFields();
         }
         else{
@@ -308,11 +309,7 @@ public class ViewFurnitureController implements Initializable {
     }
 
     private boolean isRoomSelected() {
-        return listViewRooms.getSelectionModel().getSelectedItem() != null;
-    }
-
-    private boolean isFurnitureSelected() {
-        return tableViewFurniture.getSelectionModel().getSelectedItem() != null;
+        return selectedRoom != null;
     }
 
 
