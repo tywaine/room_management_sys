@@ -30,6 +30,14 @@ public class FurnitureUpdateMessage {
         this.status = status;
     }
 
+    public boolean isStatusADD(){
+        return status.equals("ADD");
+    }
+
+    public boolean isStatusUPDATE(){
+        return status.equals("UPDATE");
+    }
+
     @Override
     public String toString() {
         return "FurnitureUpdateMessage{" +

@@ -1,13 +1,18 @@
 package com.hallmanagementsys.hallmanagement.controller;
 
 import com.hallmanagementsys.hallmanagement.dto.FurnitureDTO;
+import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureDeleteMessage;
+import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureUpdateMessage;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
 import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Room;
 import com.hallmanagementsys.hallmanagement.service.FurnitureService;
+import com.hallmanagementsys.hallmanagement.util.Json;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
+import com.hallmanagementsys.hallmanagement.websocket.MyWebSocketClient;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -33,14 +38,20 @@ public class ViewFurnitureController implements Initializable {
     private final ObservableList<Room> roomList = Room.getList();
     private FilteredList<Room> filteredRoomList;
     private Room selectedRoom;
-
     private final ObservableList<Furniture> furnitureList = FXCollections.observableArrayList();
     private FilteredList<Furniture> filteredFurnitureList;
 
     public FurnitureService furnitureService = FurnitureService.getInstance();
 
+    private static final String FURNITURE_TOPIC_UPDATE = "/topic/furnitureUpdates"; // Ensure this matches backend
+    private static final String FURNITURE_TOPIC_DELETE = "/topic/furnitureDeletes";
+
+    private final MyWebSocketClient webSocketClient = Model.getInstance().getWebSocketClient();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Subscribe to WebSocket topics
+        setupWebSocketSubscriptions();
         btnAddFurniture.setDisable(true);
         setupListView();
 
@@ -59,6 +70,70 @@ public class ViewFurnitureController implements Initializable {
 
         setupEditColumn();
         setupDeleteColumn();
+    }
+
+    private void setupWebSocketSubscriptions() {
+        // Subscribe to furniture updates
+        webSocketClient.subscribe("/topic/furnitureUpdates", FurnitureUpdateMessage.class, message -> {
+            Platform.runLater(() -> {
+                // Handle furniture update message
+                handleFurnitureUpdate(message);
+            });
+        });
+
+        // Subscribe to furniture deletes
+        webSocketClient.subscribe("/topic/furnitureDeletes", FurnitureDeleteMessage.class, message -> {
+            Platform.runLater(() -> {
+                // Handle furniture delete message
+                handleFurnitureDelete(message);
+            });
+        });
+    }
+
+    private void handleFurnitureUpdate(FurnitureUpdateMessage message) {
+        System.out.println("Received furniture update: " + message);
+        Furniture furniture = Furniture.getFurniture(message.getFurniture().getId());
+
+        if(message.isStatusADD()){
+
+            if(furniture == null){
+                Furniture newFurniture = Furniture.fromDTO(message.getFurniture());
+                furnitureList.add(newFurniture);
+            }
+            else{
+                System.out.println("Furniture already exists");
+            }
+        }
+        else{
+            if(message.isStatusUPDATE()){
+
+                if(furniture != null){
+                    furniture.setFurnitureCondition(message.getFurniture().getFurnitureCondition());
+                    furniture.setFurnitureCondition(message.getFurniture().getFurnitureCondition());
+                }
+                else{
+                    System.out.println("Furniture does not exist");
+                }
+            }
+        }
+
+    }
+
+    private void handleFurnitureDelete(FurnitureDeleteMessage message) {
+        System.out.println("Received furniture delete: " + message);
+        Furniture furniture = Furniture.getFurniture(message.getFurnitureId());
+
+        if(furniture != null){
+            Furniture.removeFurniture(furniture);
+            furnitureList.remove(furniture);
+        }
+        else{
+            System.out.println("Furniture was already deleted.");
+        }
+    }
+
+    public void sendFurnitureUpdate(FurnitureUpdateMessage message) {
+        webSocketClient.sendMessage("/furnitureUpdates", message);
     }
 
     private void setupListView() {
@@ -249,8 +324,8 @@ public class ViewFurnitureController implements Initializable {
         Furniture furniture = furnitureService.createFurnitureAndRetrieve(furnitureDTO);
 
         if(furniture != null){
-            furnitureList.add(furnitureService.createFurnitureAndRetrieve(furnitureDTO));
             txtFurnitureType.clear();
+            furnitureList.add(furniture);
             MyAlert.showAlert(Alert.AlertType.INFORMATION, "Added Furniture",
                     "Furniture type " + furnitureType + " with a " + furnitureCondition +
                             " condition" + " has been added to room " + selectedRoom.getRoomNumber() + ".");

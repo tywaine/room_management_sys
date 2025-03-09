@@ -7,6 +7,7 @@ import com.hallmanagementsys.hallmanagement.controller.staff.StaffController;
 import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
 import com.hallmanagementsys.hallmanagement.enums.StaffMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
+import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.service.FurnitureService;
 import com.hallmanagementsys.hallmanagement.service.UserService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
@@ -178,6 +179,10 @@ public class ViewFactory {
             stage.setTitle("Room Inventory Management");
             stage.setResizable(false);
 
+            stage.setOnCloseRequest(event -> {
+                onExit();
+            });
+
             loginController = loader.getController();
             loginController.shouldShow();
 
@@ -210,7 +215,7 @@ public class ViewFactory {
         } catch (IOException e) {
             e.printStackTrace();
             MyAlert.showAlert(Alert.AlertType.ERROR, "Error",
-                    "Could not load the edit dialog!");
+                    "Unexpected error occured. Please try again later.");
             return false;
         }
     }
@@ -222,6 +227,11 @@ public class ViewFactory {
             stage.setScene(scene);
             stage.setTitle("Room Inventory Management");
             stage.getScene().getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+
+            stage.setOnCloseRequest(event -> {
+                onExit();
+            });
+
             stage.show();
             stage.setResizable(false);
 
@@ -236,12 +246,22 @@ public class ViewFactory {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle(title);
+
+            stage.setOnCloseRequest(event -> {
+                onExit();
+            });
+
             stage.show();
             stage.setResizable(false);
 
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    private void onExit() {
+        System.out.println("Application is closing...");
+        Model.getInstance().getWebSocketClient().disconnect();
     }
 
     public void closeStage(Stage stage){

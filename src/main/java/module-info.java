@@ -6,13 +6,19 @@ module com.hallmanagementsys.hallmanagement {
     requires java.prefs;
     requires de.jensd.fx.glyphs.fontawesome;
     requires com.github.librepdf.openpdf;
-
     requires org.kordamp.bootstrapfx.core;
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.fasterxml.jackson.databind;
-    requires spring.messaging;
+    requires org.apache.logging.log4j;
+    requires java.logging;
+    // Spring Framework modules
     requires spring.websocket;
+    requires spring.messaging;
     requires spring.core;
+
+    // WebSocket related modules
+    requires jakarta.websocket.client;
+    requires jakarta.websocket;
 
     opens com.hallmanagementsys.hallmanagement to javafx.fxml;
     exports com.hallmanagementsys.hallmanagement;

@@ -2,6 +2,7 @@ package com.hallmanagementsys.hallmanagement.model;
 
 import com.hallmanagementsys.hallmanagement.service.*;
 import com.hallmanagementsys.hallmanagement.view.ViewFactory;
+import com.hallmanagementsys.hallmanagement.websocket.MyWebSocketClient;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 
@@ -11,9 +12,11 @@ public class Model {
     private static Model model;
     private ViewFactory viewFactory;
     private User user;
+    private MyWebSocketClient webSocketClient = new MyWebSocketClient();
 
     private Model(){
         this.viewFactory = new ViewFactory();
+        webSocketClient.connect();
     }
 
     public static synchronized Model getInstance(){
@@ -34,6 +37,10 @@ public class Model {
 
     public ViewFactory getViewFactory(){
         return viewFactory;
+    }
+
+    public MyWebSocketClient getWebSocketClient() {
+        return webSocketClient;
     }
 
     public void loadStaticData(Runnable onComplete){
