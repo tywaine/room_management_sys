@@ -38,8 +38,8 @@ public class DisplayRoomsController implements Initializable {
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> filterRoomList());
     }
 
-    public void filterRoomList(){
-        String searchText = txtSearch.getText().toLowerCase().trim();
+    private void filterRoomList(){
+        String searchText = txtSearch.getText().toUpperCase().trim();
 
         filteredRoomList.setPredicate(room -> {
             if (searchText.isEmpty()) {
@@ -47,7 +47,6 @@ public class DisplayRoomsController implements Initializable {
             }
 
             return room.getRoomNumber().contains(searchText)
-                    || room.getBlockNameProperty().get() == searchText.toUpperCase().charAt(0)
                     || String.valueOf(room.getFloor()).toLowerCase().contains(searchText)
                     || String.valueOf(room.getMaxOccupants()).contains(searchText)
                     || String.valueOf(room.getCurrentOccupants()).contains(searchText)

@@ -3,10 +3,12 @@ package com.hallmanagementsys.hallmanagement.controller;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
 import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Room;
+import com.hallmanagementsys.hallmanagement.service.FurnitureService;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,6 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EditFurnitureController implements Initializable {
+    public Label lblFurnitureId;
     public TextField txtRoomNumber;
     public TextField txtFurnitureType;
     public ChoiceBox<String> choiceBoxCondition;
@@ -36,6 +39,7 @@ public class EditFurnitureController implements Initializable {
         this.furniture = furniture;
 
         // Pre-fill the fields with current values
+        lblFurnitureId.setText("Furniture ID: " + furniture.getID());
         txtRoomNumber.setText(Room.getRoom(furniture.getRoomID()).getRoomNumber());
         txtFurnitureType.setText(furniture.getFurnitureType());
         choiceBoxCondition.setValue(furniture.getFurnitureCondition());

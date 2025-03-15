@@ -67,6 +67,7 @@ public class MyWebSocketClient {
     public void sendMessage(String destination, Object payload) {
         if (stompSession != null && stompSession.isConnected()) {
             stompSession.send("/app" + destination, payload);
+            System.out.println("Message sent to " + destination);
         }
         else {
             System.err.println("Not connected to WebSocket server");

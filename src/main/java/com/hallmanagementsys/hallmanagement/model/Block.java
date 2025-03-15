@@ -17,6 +17,12 @@ public class Block {
     private static final Map<Integer, Block> blocks = new HashMap<>();
     private static final ObservableList<Block> blockList = FXCollections.observableArrayList();
 
+    public Block(Character name, Integer maxRooms) {
+        this.id.set(0);
+        this.name.set(name);
+        this.maxRooms.set(maxRooms);
+    }
+
     public Block(Integer id, Character name, Integer maxRooms) {
         this.id.set(id);
         this.name.set(name);

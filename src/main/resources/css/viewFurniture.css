@@ -68,7 +68,7 @@
     -fx-background-color: #0078D7; /* Matches selection color */
 }
 
-/* Modern ListView Styling */
+/*ListView Styling */
 .list-view {
     -fx-background-color: #ffffff;
     -fx-background-radius: 8;
@@ -120,21 +120,7 @@
     -fx-prompt-text-fill: #888888;
 }
 
-/* Modern TextField Styling for Furniture Type and Condition */
-#txtFurnitureType, #txtFurnitureCondition {
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 8;
-    -fx-border-color: #E0E0E0;
-    -fx-border-radius: 8;
-    -fx-border-width: 2;
-    -fx-padding: 8 12 8 12;
-    -fx-font-size: 14px;
-    -fx-prompt-text-fill: #9E9E9E;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.04), 0, 0, 0, 2);
-    -fx-transition: -fx-border-color 0.3s;
-}
-
-#txtRoomNumber {
+#txtFurnitureType, #txtFurnitureCondition, #txtRoomNumber {
     -fx-background-color: #ffffff;
     -fx-background-radius: 8;
     -fx-border-color: #E0E0E0;
@@ -144,17 +130,7 @@
     -fx-font-size: 14px;
 }
 
-#txtRoomNumber:focused {
-    -fx-border-color: transparent
-}
-
-#txtFurnitureType:focused, #txtFurnitureCondition:focused {
-    -fx-border-color: #2196F3;
-    -fx-background-color: #FFFFFF;
-    -fx-effect: dropshadow(gaussian, rgba(33, 150, 243, 0.1), 0, 0, 0, 4);
-}
-
-#txtFurnitureType:hover, #txtFurnitureCondition:hover {
+#txtFurnitureCondition:hover {
     -fx-border-color: #BDBDBD;
     -fx-background-color: #FAFAFA;
 }

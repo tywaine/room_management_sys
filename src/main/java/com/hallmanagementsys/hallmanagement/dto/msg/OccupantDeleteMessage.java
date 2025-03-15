@@ -32,7 +32,7 @@ public class OccupantDeleteMessage {
     public String toString() {
         return "OccupantDeleteMessage{" +
                 "occupantId=" + occupantId +
-                ", message='" + message + '\'' +
+                ",\nmessage='" + message + '\'' +
                 '}';
     }
 }

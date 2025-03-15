@@ -30,7 +30,7 @@ module com.hallmanagementsys.hallmanagement {
     exports com.hallmanagementsys.hallmanagement.util;
     exports com.hallmanagementsys.hallmanagement.model;
     exports com.hallmanagementsys.hallmanagement.service;
-    exports com.hallmanagementsys.hallmanagement.view;
+    exports com.hallmanagementsys.hallmanagement.viewFactory;
     exports com.hallmanagementsys.hallmanagement.websocket;
     exports com.hallmanagementsys.hallmanagement.dto.msg;
 }

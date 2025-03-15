@@ -27,10 +27,11 @@
             <!-- TableView for Furniture -->
             <TableView fx:id="tableViewFurniture" prefHeight="686.0" prefWidth="977.0">
                 <columns>
-                    <TableColumn fx:id="columnFurnitureType" prefWidth="341.0" text="Furniture Type" />
-                    <TableColumn fx:id="columnFurnitureCondition" prefWidth="310.0" text="Furniture Condition" />
-                    <TableColumn fx:id="columnEdit" prefWidth="133.0" text="Edit" />
-               <TableColumn fx:id="columnDelete" prefWidth="155.0" text="Delete" />
+               <TableColumn fx:id="columnFurnitureId" prefWidth="89.0" text="ID" />
+                    <TableColumn fx:id="columnFurnitureType" prefWidth="300.0" text="Furniture Type" />
+                    <TableColumn fx:id="columnFurnitureCondition" prefWidth="266.0" text="Furniture Condition" />
+                    <TableColumn fx:id="columnEdit" prefWidth="141.0" text="Edit" />
+               <TableColumn fx:id="columnDelete" prefWidth="140.0" text="Delete" />
                 </columns>
             </TableView>
 

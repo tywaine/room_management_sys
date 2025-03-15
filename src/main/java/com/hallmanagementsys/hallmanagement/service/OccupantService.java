@@ -69,9 +69,10 @@ public class OccupantService {
         getOccupants(url);
     }
 
-    public HttpResponse<String> sendCreateOccupantRequest(OccupantDTO occupantDTO) {
+    public HttpResponse<String> sendCreateOccupantRequest(Occupant occupant) {
         try {
             // Convert occupant object to JSON
+            OccupantDTO occupantDTO = occupant.toDTO();
             String occupantJson = Json.stringify(Json.toJson(occupantDTO));
             System.out.println(occupantJson);
 
@@ -90,8 +91,8 @@ public class OccupantService {
         }
     }
 
-    public Occupant createOccupantAndRetrieve(OccupantDTO occupantDTO) {
-        HttpResponse<String> response = sendCreateOccupantRequest(occupantDTO);
+    public Occupant createOccupant(Occupant occupant) {
+        HttpResponse<String> response = sendCreateOccupantRequest(occupant);
 
         if (response == null) {
             MyAlert.showAlert(Alert.AlertType.ERROR, "Error", "No response from server.");
@@ -100,8 +101,8 @@ public class OccupantService {
 
         if (response.statusCode() == HttpStatus.CREATED) {  // Check if response is CREATED
             try {
-                OccupantDTO occupant = Json.fromJson(response.body(), OccupantDTO.class);
-                return Occupant.fromDTO(occupant);
+                OccupantDTO occupantDTO = Json.fromJson(response.body(), OccupantDTO.class);
+                return Occupant.fromDTO(occupantDTO);
             } catch (Exception e) {
                 e.printStackTrace();
                 MyAlert.showAlert(Alert.AlertType.ERROR, "Error", "Failed to parse occupant from response.");
@@ -113,9 +114,16 @@ public class OccupantService {
         return null;
     }
 
-    public boolean updateOccupant(Integer occupantID, String firstName, String lastName, String idNumber,
-                                               String email, String phoneNumber, Integer roomID) {
+    public boolean updateOccupant(Occupant occupant) {
         try {
+            Integer occupantID = occupant.getID();
+            String firstName = occupant.getFirstName();
+            String lastName = occupant.getLastName();
+            String idNumber = occupant.getIdNumber();
+            String phoneNumber = occupant.getPhoneNumber();
+            String email = occupant.getEmail();
+            Integer roomID = occupant.getRoomID();
+
             String updateUrl = baseUrl + "/update/" + occupantID;
 
             // Build the request body only with non-null parameters

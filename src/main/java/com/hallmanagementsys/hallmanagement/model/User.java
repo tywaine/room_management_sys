@@ -22,6 +22,14 @@ public class User {
     private static final Map<Integer, User> staffs = new HashMap<>();
     private static final ObservableList<User> staffList = FXCollections.observableArrayList();
 
+    public User(String username, String passwordHash, String role, LocalDateTime createdAt) {
+        this.id.set(0);
+        setUsername(username);
+        setPasswordHash(passwordHash);
+        setRole(role);
+        setCreatedAt(createdAt);
+    }
+
     public User(Integer id, String username, String passwordHash, String role, LocalDateTime createdAt) {
         this.id.set(id);
         setUsername(username);

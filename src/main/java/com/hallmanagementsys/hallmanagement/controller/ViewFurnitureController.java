@@ -1,6 +1,5 @@
 package com.hallmanagementsys.hallmanagement.controller;
 
-import com.hallmanagementsys.hallmanagement.dto.FurnitureDTO;
 import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureDeleteMessage;
 import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureUpdateMessage;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
@@ -25,6 +24,7 @@ import java.util.ResourceBundle;
 public class ViewFurnitureController implements Initializable {
     public ListView<Room> listViewRooms;
     public TableView<Furniture> tableViewFurniture;
+    public TableColumn<Furniture, Integer> columnFurnitureId;
     public TableColumn<Furniture, String> columnFurnitureType;
     public TableColumn<Furniture, String> columnFurnitureCondition;
     public TableColumn<Furniture, Void> columnEdit;
@@ -60,6 +60,7 @@ public class ViewFurnitureController implements Initializable {
         choiceBoxCondition.setItems(staffCommandOptions);
         choiceBoxCondition.setValue("POOR");
 
+        columnFurnitureId.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         columnFurnitureType.setCellValueFactory(cellData -> cellData.getValue().furnitureTypeProperty());
         columnFurnitureCondition.setCellValueFactory(cellData -> cellData.getValue().furnitureConditionProperty());
 
@@ -73,7 +74,7 @@ public class ViewFurnitureController implements Initializable {
 
     private void setupWebSocketSubscriptions() {
         // Subscribe to furniture updates
-        webSocketClient.subscribe("/topic/furnitureUpdates", FurnitureUpdateMessage.class, message -> {
+        webSocketClient.subscribe(FURNITURE_TOPIC_UPDATE, FurnitureUpdateMessage.class, message -> {
             Platform.runLater(() -> {
                 // Handle furniture update message
                 handleFurnitureUpdate(message);
@@ -81,7 +82,7 @@ public class ViewFurnitureController implements Initializable {
         });
 
         // Subscribe to furniture deletes
-        webSocketClient.subscribe("/topic/furnitureDeletes", FurnitureDeleteMessage.class, message -> {
+        webSocketClient.subscribe(FURNITURE_TOPIC_DELETE, FurnitureDeleteMessage.class, message -> {
             Platform.runLater(() -> {
                 // Handle furniture delete message
                 handleFurnitureDelete(message);
@@ -131,9 +132,12 @@ public class ViewFurnitureController implements Initializable {
         }
     }
 
+    /*
     public void sendFurnitureUpdate(FurnitureUpdateMessage message) {
         webSocketClient.sendMessage("/furnitureUpdates", message);
     }
+
+     */
 
     private void setupListView() {
         listViewRooms.setCellFactory(param -> new ListCell<>() {
@@ -286,11 +290,18 @@ public class ViewFurnitureController implements Initializable {
     }
 
     private void editFurniture(Furniture furniture) {
-        boolean success = Model.getInstance().getViewFactory().showEditFurnitureDialog(furniture);
+        boolean saveClicked = Model.getInstance().getViewFactory().showEditFurnitureDialog(furniture);
 
-        if (success) {
-            MyAlert.showAlert(Alert.AlertType.INFORMATION, "Success",
-                    "Furniture updated successfully!");
+        if (saveClicked) {
+            if(FurnitureService.getInstance().updateFurniture(furniture)){
+                MyAlert.showAlert(Alert.AlertType.INFORMATION, "Success",
+                        "Furniture updated successfully!");
+            }
+            else{
+                MyAlert.showAlert(Alert.AlertType.ERROR, "Unknown Error",
+                        "Error updating Furniture in server.");
+            }
+
             updateFurnitureList(selectedRoom);
         }
     }
@@ -312,13 +323,12 @@ public class ViewFurnitureController implements Initializable {
         return selectedRoom != null;
     }
 
-
     public void addFurniture() {
         String furnitureType = txtFurnitureType.getText().trim();
         String furnitureCondition = choiceBoxCondition.getValue();
 
-        FurnitureDTO furnitureDTO = new FurnitureDTO(null, selectedRoom.getID(), furnitureType, furnitureCondition);
-        Furniture furniture = furnitureService.createFurnitureAndRetrieve(furnitureDTO);
+        Furniture newFurniture = new Furniture(selectedRoom.getID(), furnitureType, furnitureCondition);
+        Furniture furniture = furnitureService.createFurniture(newFurniture);
 
         if(furniture != null){
             txtFurnitureType.clear();

@@ -9,7 +9,7 @@
     </left>
 
     <center>
-        <fx:include source="displayRooms.fxml"/>
+        <fx:include source="displayRoomsView.fxml"/>
     </center>
 
 </BorderPane>

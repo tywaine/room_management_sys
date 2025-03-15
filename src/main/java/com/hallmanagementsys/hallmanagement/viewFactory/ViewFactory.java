@@ -1,4 +1,4 @@
-package com.hallmanagementsys.hallmanagement.view;
+package com.hallmanagementsys.hallmanagement.viewFactory;
 
 import com.hallmanagementsys.hallmanagement.controller.EditFurnitureController;
 import com.hallmanagementsys.hallmanagement.controller.LoginController;
@@ -54,7 +54,7 @@ public class ViewFactory {
     public AnchorPane getDisplayRoomsView() {
         if(displayRoomsView == null){
             try{
-                displayRoomsView = new FXMLLoader(getClass().getResource("/fxml/admin/displayRooms.fxml")).load();
+                displayRoomsView = new FXMLLoader(getClass().getResource("/view/admin/displayRoomsView.fxml")).load();
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -66,7 +66,7 @@ public class ViewFactory {
     public AnchorPane getGenerateReportView() {
         if(generateReportView == null){
             try{
-                generateReportView = new FXMLLoader(getClass().getResource("/fxml/admin/generateReport.fxml")).load();
+                generateReportView = new FXMLLoader(getClass().getResource("/view/admin/generateReportView.fxml")).load();
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -78,7 +78,7 @@ public class ViewFactory {
     public AnchorPane getManageOccupantsView() {
         if(manageOccupantsView == null){
             try{
-                manageOccupantsView = new FXMLLoader(getClass().getResource("/fxml/admin/manageOccupants.fxml")).load();
+                manageOccupantsView = new FXMLLoader(getClass().getResource("/view/admin/manageOccupantsView.fxml")).load();
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -91,7 +91,7 @@ public class ViewFactory {
     public AnchorPane getAccountView() {
         if(accountView == null){
             try{
-                accountView = new FXMLLoader(getClass().getResource("/fxml/account.fxml")).load();
+                accountView = new FXMLLoader(getClass().getResource("/view/account.fxml")).load();
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -103,7 +103,7 @@ public class ViewFactory {
     public AnchorPane getViewFurnitureView() {
         if(viewFurnitureView == null){
             try{
-                viewFurnitureView = new FXMLLoader(getClass().getResource("/fxml/viewFurniture.fxml")).load();
+                viewFurnitureView = new FXMLLoader(getClass().getResource("/view/viewFurnitureView.fxml")).load();
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -129,21 +129,21 @@ public class ViewFactory {
     }
 
     public void showAdminWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/admin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/admin.fxml"));
         AdminController adminController = new AdminController();
         loader.setController(adminController);
         createStage(loader);
     }
 
     public void showStaffWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/staff/staff.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/staff/staff.fxml"));
         StaffController staffController = new StaffController();
         loader.setController(staffController);
         createStage(loader);
     }
 
     public void showSignUpWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/signUp.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/signUpView.fxml"));
         createStage(loader, "Sign Up");
         MyAlert.showAlert(Alert.AlertType.INFORMATION, "First time creating a User account",
                 """
@@ -154,7 +154,7 @@ public class ViewFactory {
     }
 
     public void showLoginWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/loginView.fxml"));
         createStage(loader);
     }
 
@@ -169,7 +169,7 @@ public class ViewFactory {
     }
 
     public void loginWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/loginView.fxml"));
         LoginController loginController;
 
         try {
@@ -193,7 +193,7 @@ public class ViewFactory {
 
     public boolean showEditFurnitureDialog(Furniture furniture) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/editFurniture.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/editFurnitureView.fxml"));
             Scene scene = new Scene(loader.load());
 
             Stage dialogStage = new Stage();
@@ -206,16 +206,12 @@ public class ViewFactory {
             controller.setFurniture(furniture);
 
             dialogStage.showAndWait();
-
-            if (controller.isSaveClicked()) {
-                return FurnitureService.getInstance().updateFurniture(furniture);
-            }
-
-            return false;
-        } catch (IOException e) {
+            return controller.isSaveClicked();
+        }
+        catch (IOException e) {
             e.printStackTrace();
             MyAlert.showAlert(Alert.AlertType.ERROR, "Error",
-                    "Unexpected error occured. Please try again later.");
+                    "Unexpected error occurred. Please try again later.");
             return false;
         }
     }

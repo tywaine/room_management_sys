@@ -32,7 +32,7 @@ public class FurnitureDeleteMessage {
     public String toString() {
         return "FurnitureDeleteMessage{" +
                 "furnitureId=" + furnitureId +
-                ", message='" + message + '\'' +
+                ",\nmessage='" + message + '\'' +
                 '}';
     }
 }

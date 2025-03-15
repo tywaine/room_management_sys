@@ -94,7 +94,7 @@ public class SignUpController implements Initializable {
 
         try {
             // Create a new user object
-            UserDTO newAdmin = new UserDTO(null, username, MyBCrypt.hashPassword(password), "Admin", LocalDateTime.now());
+            User newAdmin = new User(username, MyBCrypt.hashPassword(password), "Admin", LocalDateTime.now());
 
             // Send the request and get the response
             HttpResponse<String> response = userService.sendCreateUserRequest(newAdmin);

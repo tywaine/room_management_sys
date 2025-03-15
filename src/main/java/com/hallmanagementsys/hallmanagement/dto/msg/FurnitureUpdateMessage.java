@@ -42,7 +42,7 @@ public class FurnitureUpdateMessage {
     public String toString() {
         return "FurnitureUpdateMessage{" +
                 "furniture=" + furniture +
-                ", status='" + status + '\'' +
+                ",\nstatus='" + status + '\'' +
                 '}';
     }
 }

@@ -69,9 +69,10 @@ public class FurnitureService {
         getFurniture(url);
     }
 
-    public HttpResponse<String> sendCreateFurnitureRequest(FurnitureDTO furnitureDTO) {
+    public HttpResponse<String> sendCreateFurnitureRequest(Furniture furniture) {
         try {
             // Convert furniture object to JSON
+            FurnitureDTO furnitureDTO = furniture.toDTO();
             String furnitureJson = Json.stringify(Json.toJson(furnitureDTO));
             System.out.println(furnitureJson);
 
@@ -90,8 +91,8 @@ public class FurnitureService {
         }
     }
 
-    public Furniture createFurnitureAndRetrieve(FurnitureDTO furnitureDTO) {
-        HttpResponse<String> response = sendCreateFurnitureRequest(furnitureDTO);
+    public Furniture createFurniture(Furniture furniture) {
+        HttpResponse<String> response = sendCreateFurnitureRequest(furniture);
 
         if (response == null) {
             MyAlert.showAlert(Alert.AlertType.ERROR, "Error", "No response from server.");
@@ -100,8 +101,8 @@ public class FurnitureService {
 
         if (response.statusCode() == HttpStatus.CREATED) {  // Check if response is CREATED
             try {
-                FurnitureDTO furniture = Json.fromJson(response.body(), FurnitureDTO.class);
-                return Furniture.fromDTO(furniture);
+                FurnitureDTO furnitureDTO = Json.fromJson(response.body(), FurnitureDTO.class);
+                return Furniture.fromDTO(furnitureDTO);
             } catch (Exception e) {
                 e.printStackTrace();
                 MyAlert.showAlert(Alert.AlertType.ERROR, "Error", "Failed to parse furniture from response.");

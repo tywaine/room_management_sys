@@ -159,9 +159,10 @@ public class UserService {
         getUsers(url);
     }
 
-    public HttpResponse<String> sendCreateUserRequest(UserDTO userDTO) {
+    public HttpResponse<String> sendCreateUserRequest(User user) {
         try {
             // Convert user object to JSON using Jackson
+            UserDTO userDTO = user.toDTO();
             String userJson = Json.stringify(Json.toJson(userDTO));
             System.out.println(Json.prettyPrint(userDTO));
 
@@ -180,8 +181,8 @@ public class UserService {
         }
     }
 
-    public User createUserAndRetrieve(UserDTO userDTO) {
-        HttpResponse<String> response = sendCreateUserRequest(userDTO);
+    public User createUser(User user) {
+        HttpResponse<String> response = sendCreateUserRequest(user);
 
         if (response == null) {
             MyAlert.showAlert(Alert.AlertType.ERROR, "Error", "No response from server.");
@@ -190,8 +191,8 @@ public class UserService {
 
         if (response.statusCode() == HttpStatus.CREATED) {  // Check if response is CREATED
             try {
-                UserDTO user = Json.fromJson(response.body(), UserDTO.class);
-                return User.fromDTO(user);
+                UserDTO userDTO = Json.fromJson(response.body(), UserDTO.class);
+                return User.fromDTO(userDTO);
             } catch (Exception e) {
                 e.printStackTrace();
                 MyAlert.showAlert(Alert.AlertType.ERROR, "Error", "Failed to parse user from response.");
@@ -203,8 +204,13 @@ public class UserService {
         return null;
     }
 
-    public boolean updateUser(Integer userID, String username, String passwordHash, String role) {
+    public boolean updateUser(User user) {
         try {
+            Integer userID = user.getID();
+            String username = user.getUsername();
+            String passwordHash = user.getPasswordHash();
+            String role = user.getRole();
+
             String updateUrl = baseUrl + "/update/" + userID;
 
             // Build the request body only with non-null parameters

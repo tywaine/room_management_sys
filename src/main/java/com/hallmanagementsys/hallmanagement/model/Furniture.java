@@ -17,11 +17,18 @@ public class Furniture {
     private static final Map<Integer, Furniture> furniture = new HashMap<>();
     private static final ObservableList<Furniture> furnitureList = FXCollections.observableArrayList();
 
+    public Furniture(Integer roomID, String furnitureType, String furnitureCondition) {
+        this.id.set(0);
+        setRoomID(roomID);
+        setFurnitureType(furnitureType);
+        setFurnitureCondition(furnitureCondition.toUpperCase());
+    }
+
     public Furniture(Integer id, Integer roomID, String furnitureType, String furnitureCondition) {
         this.id.set(id);
         setRoomID(roomID);
         setFurnitureType(furnitureType);
-        setFurnitureCondition(furnitureCondition);
+        setFurnitureCondition(furnitureCondition.toUpperCase());
 
         addFurniture(this);
     }
