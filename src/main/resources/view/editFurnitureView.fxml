@@ -30,7 +30,7 @@
             </font></Label>
             <TextField fx:id="txtFurnitureType" editable="false" prefHeight="26.0" prefWidth="237.0" />
 
-            <Label prefHeight="20.0" prefWidth="210.0" text="FurnitureCondition">
+            <Label prefHeight="20.0" prefWidth="210.0" text="Furniture Condition">
             <font>
                <Font name="System Bold Italic" size="15.0" />
             </font></Label>

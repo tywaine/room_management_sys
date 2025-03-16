@@ -30,9 +30,9 @@ public class ViewFurnitureController implements Initializable {
     public TableColumn<Furniture, Void> columnEdit;
     public TableColumn<Furniture, Void> columnDelete;
     public Button btnAddFurniture;
-    public TextField txtSearchRoom, txtSearchFurniture, txtRoomNumber, txtFurnitureType;
+    public TextField txtSearchRoom, txtSearchFurniture, txtRoomNumber;
     public Label lblTypeError;
-    public ChoiceBox<String> choiceBoxCondition;
+    public ChoiceBox<String> choiceBoxCondition, choiceBoxType;
 
     private final ObservableList<Room> roomList = Room.getList();
     private FilteredList<Room> filteredRoomList;
@@ -54,11 +54,26 @@ public class ViewFurnitureController implements Initializable {
         btnAddFurniture.setDisable(true);
         setupListView();
 
-        txtFurnitureType.textProperty().addListener((observable, oldValue, newValue) -> validateFields());
+        ObservableList<String> furnitureTypeOptions = FXCollections.observableArrayList(
+                "None",
+                "Easy Chair",
+                "Bed",
+                "Mattress",
+                "Closet",
+                "Study Table",
+                "Study Chair",
+                "Wall",
+                "Chest of Draws",
+                "Window"
+        );
+        choiceBoxType.setItems(furnitureTypeOptions);
+        choiceBoxType.setValue("None");
+        choiceBoxType.valueProperty().addListener((observable, oldValue, newValue) -> validateFields());
 
-        ObservableList<String> staffCommandOptions = FXCollections.observableArrayList("POOR", "GOOD", "EXCELLENT");
-        choiceBoxCondition.setItems(staffCommandOptions);
-        choiceBoxCondition.setValue("POOR");
+        ObservableList<String> furnitureConditionOptions = FXCollections.observableArrayList( "None", "POOR", "GOOD", "EXCELLENT");
+        choiceBoxCondition.setItems(furnitureConditionOptions);
+        choiceBoxCondition.setValue("None");
+        choiceBoxCondition.valueProperty().addListener((observable, oldValue, newValue) -> validateFields());
 
         columnFurnitureId.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         columnFurnitureType.setCellValueFactory(cellData -> cellData.getValue().furnitureTypeProperty());
@@ -200,7 +215,8 @@ public class ViewFurnitureController implements Initializable {
                 return true;
             }
 
-            return furniture.getFurnitureType().toUpperCase().contains(searchText)
+            return String.valueOf(furniture.getID()).contains(searchText)
+                    || furniture.getFurnitureType().toUpperCase().contains(searchText)
                     || furniture.getFurnitureCondition().contains(searchText);
         });
     }
@@ -311,12 +327,17 @@ public class ViewFurnitureController implements Initializable {
     }
 
     private boolean allFieldsValidForAdd(){
-        if(txtFurnitureType.getText() == null){
+        if(choiceBoxType.getValue() == null || choiceBoxType.getValue().equals("None")){
             return false;
         }
 
-        String furnitureType = txtFurnitureType.getText().trim();
-        return !furnitureType.isEmpty() && isRoomSelected();
+        if(choiceBoxCondition.getValue() == null || choiceBoxCondition.getValue().equals("None")){
+            return false;
+        }
+
+        String furnitureType = choiceBoxType.getValue();
+        String furnitureCondition = choiceBoxCondition.getValue();
+        return !furnitureType.isEmpty() && !furnitureCondition.isEmpty() && isRoomSelected();
     }
 
     private boolean isRoomSelected() {
@@ -324,14 +345,13 @@ public class ViewFurnitureController implements Initializable {
     }
 
     public void addFurniture() {
-        String furnitureType = txtFurnitureType.getText().trim();
+        String furnitureType = choiceBoxType.getValue();
         String furnitureCondition = choiceBoxCondition.getValue();
 
         Furniture newFurniture = new Furniture(selectedRoom.getID(), furnitureType, furnitureCondition);
         Furniture furniture = furnitureService.createFurniture(newFurniture);
 
         if(furniture != null){
-            txtFurnitureType.clear();
             furnitureList.add(furniture);
             MyAlert.showAlert(Alert.AlertType.INFORMATION, "Added Furniture",
                     "Furniture type " + furnitureType + " with a " + furnitureCondition +
