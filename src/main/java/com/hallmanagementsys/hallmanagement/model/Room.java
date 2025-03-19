@@ -220,28 +220,6 @@ public class Room {
         }
     }
 
-    public static void update(Room room, Integer blockID, String roomNumber, Integer floor, Integer maxOccupants) {
-        if(room != null){
-            room.setBlockID(blockID);
-            room.setRoomNumber(roomNumber);
-            room.setFloor(floor);
-            room.setMaxOccupants(maxOccupants);
-        }
-        else{
-            System.out.println("Room value is null");
-        }
-    }
-
-    public static void removeRoom(Room room) {
-        if(isValidRoom(room)){
-            roomList.remove(room);
-            rooms.remove(room.getID());
-        }
-        else{
-            System.out.println("Room ID not found");
-        }
-    }
-
     public static Room getRoom(Integer roomID) {
         if(containsRoom(roomID)){
             return rooms.get(roomID);
@@ -262,10 +240,5 @@ public class Room {
 
     public static ObservableList<Room> getList(){
         return roomList;
-    }
-
-    public static void emptyRooms() {
-        rooms.clear();
-        roomList.clear();
     }
 }

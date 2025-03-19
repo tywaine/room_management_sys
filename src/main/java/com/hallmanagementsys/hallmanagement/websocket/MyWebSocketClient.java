@@ -18,14 +18,21 @@ public class MyWebSocketClient {
     private static final String WEBSOCKET_URL = "wss://rims-backend.tywaine.me/ws";
     private StompSession stompSession;
     private final WebSocketStompClient stompClient;
+    private static MyWebSocketClient instance;
 
-    public MyWebSocketClient() {
+    private MyWebSocketClient() {
         List<Transport> transports = new ArrayList<>();
         transports.add(new WebSocketTransport(new StandardWebSocketClient()));
-
         WebSocketClient client = new SockJsClient(transports);
         this.stompClient = new WebSocketStompClient(client);
         this.stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+    }
+
+    public static synchronized MyWebSocketClient getInstance() {
+        if (instance == null) {
+            instance = new MyWebSocketClient();
+        }
+        return instance;
     }
 
     public void connect() {

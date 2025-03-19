@@ -1,7 +1,6 @@
 package com.hallmanagementsys.hallmanagement.controller.admin;
 
 import com.hallmanagementsys.hallmanagement.model.Room;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -21,7 +20,6 @@ public class DisplayRoomsController implements Initializable {
     public TableColumn<Room, Integer> columnTotalFurniture;
     public TextField txtSearch;
 
-    private final ObservableList<Room> roomList = Room.getList();
     private FilteredList<Room> filteredRoomList;
 
     @Override
@@ -33,7 +31,7 @@ public class DisplayRoomsController implements Initializable {
         columnCurrentOccupants.setCellValueFactory(cellData -> cellData.getValue().currentOccupantsProperty().asObject());
         columnTotalFurniture.setCellValueFactory(cellData -> cellData.getValue().totalFurnitureProperty().asObject());
 
-        filteredRoomList = new FilteredList<>(roomList, p -> true);
+        filteredRoomList = new FilteredList<>(Room.getList(), p -> true);
         tableViewRooms.setItems(filteredRoomList);
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> filterRoomList());
     }

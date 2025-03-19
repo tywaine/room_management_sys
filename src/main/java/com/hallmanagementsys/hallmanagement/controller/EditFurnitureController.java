@@ -66,7 +66,6 @@ public class EditFurnitureController implements Initializable {
     }
 
     public void handleSave() {
-        furniture.setFurnitureType(txtFurnitureType.getText());
         furniture.setFurnitureCondition(choiceBoxCondition.getValue());
         saveClicked = true;
         closeDialog();

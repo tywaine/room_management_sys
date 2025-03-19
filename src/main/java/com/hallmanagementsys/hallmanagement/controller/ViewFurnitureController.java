@@ -34,7 +34,6 @@ public class ViewFurnitureController implements Initializable {
     public Label lblTypeError;
     public ChoiceBox<String> choiceBoxCondition, choiceBoxType;
 
-    private final ObservableList<Room> roomList = Room.getList();
     private FilteredList<Room> filteredRoomList;
     private Room selectedRoom;
     private final ObservableList<Furniture> furnitureList = FXCollections.observableArrayList();
@@ -111,9 +110,14 @@ public class ViewFurnitureController implements Initializable {
 
         if(message.isStatusADD()){
 
+            // Check and make sure furniture with the same id is not in the furnitureList
+            // If it is not then furniture will be null
             if(furniture == null){
                 Furniture newFurniture = Furniture.fromDTO(message.getFurniture());
-                furnitureList.add(newFurniture);
+
+                if(selectedRoom != null && selectedRoom.getID().equals(newFurniture.getRoomID())){
+                    furnitureList.add(newFurniture);
+                }
             }
             else{
                 System.out.println("Furniture already exists");
@@ -122,8 +126,8 @@ public class ViewFurnitureController implements Initializable {
         else{
             if(message.isStatusUPDATE()){
 
+                // Furniture should be in the Furniture.getList() and not be null
                 if(furniture != null){
-                    furniture.setFurnitureCondition(message.getFurniture().getFurnitureCondition());
                     furniture.setFurnitureCondition(message.getFurniture().getFurnitureCondition());
                 }
                 else{
@@ -140,19 +144,15 @@ public class ViewFurnitureController implements Initializable {
 
         if(furniture != null){
             Furniture.removeFurniture(furniture);
-            furnitureList.remove(furniture);
+
+            if(selectedRoom != null && selectedRoom.getID().equals(furniture.getRoomID())){
+                furnitureList.remove(furniture);
+            }
         }
         else{
             System.out.println("Furniture was already deleted.");
         }
     }
-
-    /*
-    public void sendFurnitureUpdate(FurnitureUpdateMessage message) {
-        webSocketClient.sendMessage("/furnitureUpdates", message);
-    }
-
-     */
 
     private void setupListView() {
         listViewRooms.setCellFactory(param -> new ListCell<>() {
@@ -169,7 +169,7 @@ public class ViewFurnitureController implements Initializable {
         });
 
         // Initialize filtered list for rooms
-        filteredRoomList = new FilteredList<>(roomList, _ -> true);
+        filteredRoomList = new FilteredList<>(Room.getList(), _ -> true);
         listViewRooms.setItems(filteredRoomList);
 
         // Add listener for room search
@@ -309,7 +309,7 @@ public class ViewFurnitureController implements Initializable {
         boolean saveClicked = Model.getInstance().getViewFactory().showEditFurnitureDialog(furniture);
 
         if (saveClicked) {
-            if(FurnitureService.getInstance().updateFurniture(furniture)){
+            if(furnitureService.updateFurniture(furniture)){
                 MyAlert.showAlert(Alert.AlertType.INFORMATION, "Success",
                         "Furniture updated successfully!");
             }

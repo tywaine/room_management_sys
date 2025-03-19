@@ -8,7 +8,6 @@ import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
 import com.hallmanagementsys.hallmanagement.enums.StaffMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
 import com.hallmanagementsys.hallmanagement.model.Model;
-import com.hallmanagementsys.hallmanagement.service.FurnitureService;
 import com.hallmanagementsys.hallmanagement.service.UserService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
 import javafx.beans.property.ObjectProperty;
@@ -37,9 +36,18 @@ public class ViewFactory {
     private AnchorPane accountView;
     private AnchorPane viewFurnitureView;
 
-    public ViewFactory(){
+    private static ViewFactory instance;
+
+    private ViewFactory() {
         this.adminSelectedMenuItem = new SimpleObjectProperty<>();
         this.staffSelectedMenuItem = new SimpleObjectProperty<>();
+    }
+
+    public static ViewFactory getInstance() {
+        if (instance == null) {
+            instance = new ViewFactory();
+        }
+        return instance;
     }
 
     public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem() {

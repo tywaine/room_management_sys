@@ -212,3 +212,7 @@
 .choice-box:focused .arrow {
     -fx-background-color: #2196F3;
 }
+
+.button {
+    -fx-background-insets: 0;
+}

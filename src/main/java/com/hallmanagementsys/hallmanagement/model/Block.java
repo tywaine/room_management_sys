@@ -98,7 +98,7 @@ public class Block {
         return Integer.hashCode(getID());
     }
 
-    // Convert Block -> BlockDTO
+    // Convert Block -> BlockDTO (Block Data transfer Object)
     public BlockDTO toDTO() {
         if(getID() == 0) {
             return new BlockDTO(null, getName(), getMaxRooms());
@@ -107,7 +107,7 @@ public class Block {
         return new BlockDTO(getID(), getName(), getMaxRooms());
     }
 
-    // Convert BlockDTO -> Block
+    // Convert BlockDTO (Block Data transfer Object) -> Block
     public static Block fromDTO(BlockDTO dto) {
         return new Block(dto.getId(), dto.getName(), dto.getMaxRooms());
     }
@@ -124,26 +124,6 @@ public class Block {
             else{
                 System.out.println("Block is already present!");
             }
-        }
-    }
-
-    public static void update(Block block, Character name, Integer maxRooms) {
-        if(block != null){
-            block.setName(name);
-            block.setMaxRooms(maxRooms);
-        }
-        else{
-            System.out.println("Block value is null");
-        }
-    }
-
-    public static void removeBlock(Block block) {
-        if(isValidBlock(block)){
-            blockList.remove(block);
-            blocks.remove(block.getID());
-        }
-        else{
-            System.out.println("Block ID not found");
         }
     }
 
@@ -167,10 +147,5 @@ public class Block {
 
     public static ObservableList<Block> getList(){
         return blockList;
-    }
-
-    public static void emptyBlocks() {
-        blocks.clear();
-        blockList.clear();
     }
 }

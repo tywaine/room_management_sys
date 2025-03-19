@@ -6,7 +6,7 @@
 
     <groupId>com.hallmanagementSys</groupId>
     <artifactId>hallmanagement</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>hallmanagement_frontend</name>
 
     <properties>
@@ -20,7 +20,6 @@
             <artifactId>javafx-controls</artifactId>
             <version>23.0.1</version>
         </dependency>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>

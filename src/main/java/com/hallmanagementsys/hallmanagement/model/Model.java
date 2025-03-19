@@ -12,10 +12,10 @@ public class Model {
     private static Model model;
     private final ViewFactory viewFactory;
     private User user;
-    private final MyWebSocketClient webSocketClient = new MyWebSocketClient();
+    private final MyWebSocketClient webSocketClient = MyWebSocketClient.getInstance();
 
     private Model(){
-        this.viewFactory = new ViewFactory();
+        this.viewFactory = ViewFactory.getInstance();
         webSocketClient.connect();
     }
 
@@ -43,6 +43,7 @@ public class Model {
         return webSocketClient;
     }
 
+    // Load static data into a separate thread
     public void loadStaticData(Runnable onComplete){
         Task<Void> task = new Task<>() {
             @Override
@@ -114,8 +115,8 @@ public class Model {
         new Thread(task).start();
     }
 
+    // Empty data from the different static lists, maps that are associated to the model classes
     public void emptyData(){
-        User.emptyStaff();
         Furniture.emptyFurniture();
         Occupant.emptyOccupants();
     }

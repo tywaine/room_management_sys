@@ -178,6 +178,32 @@ public class Occupant {
         return Integer.hashCode(getID());
     }
 
+    public void update(String firstName, String lastName, String idNumber, String email, String phoneNumber, Integer roomID) {
+        if(firstName != null){
+            setFirstName(firstName);
+        }
+
+        if(lastName != null){
+            setLastName(lastName);
+        }
+
+        if(idNumber != null){
+            setIdNumber(idNumber);
+        }
+
+        if(email != null){
+            setEmail(email);
+        }
+
+        if(phoneNumber != null){
+            setPhoneNumber(phoneNumber);
+        }
+
+        if(roomID != null){
+            setRoomID(roomID);
+        }
+    }
+
     // Convert Occupant -> OccupantDTO
     public OccupantDTO toDTO() {
         if(getID() == 0) {
@@ -209,20 +235,6 @@ public class Occupant {
             else{
                 System.out.println("Occupant is already present!");
             }
-        }
-    }
-
-    public static void update(Occupant occupant, String firstName, String lastName, String idNumber, String email, String phoneNumber, Integer roomID) {
-        if(occupant != null){
-            occupant.setFirstName(firstName);
-            occupant.setLastName(lastName);
-            occupant.setIdNumber(idNumber);
-            occupant.setEmail(email);
-            occupant.setPhoneNumber(phoneNumber);
-            occupant.setRoomID(roomID);
-        }
-        else{
-            System.out.println("Occupant value is null");
         }
     }
 

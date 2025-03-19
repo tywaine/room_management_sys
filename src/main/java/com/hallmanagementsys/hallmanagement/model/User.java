@@ -19,9 +19,6 @@ public class User {
     private final ObjectProperty<LocalDateTime> createdAt = new SimpleObjectProperty<>();
     private final StringProperty createdAtFormatted = new SimpleStringProperty();
 
-    private static final Map<Integer, User> staffs = new HashMap<>();
-    private static final ObservableList<User> staffList = FXCollections.observableArrayList();
-
     public User(String username, String passwordHash, String role, LocalDateTime createdAt) {
         this.id.set(0);
         setUsername(username);
@@ -38,8 +35,6 @@ public class User {
         setCreatedAt(createdAt);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         this.createdAtFormatted.set(createdAt.format(formatter));
-
-        addStaff(this);
     }
 
     // Properties
@@ -210,71 +205,17 @@ public class User {
         return 50;
     }
 
-    public static void update(User user, String username, String passwordHash, String role){
-        if(user != null){
-            user.setUsername(username);
-            user.setPasswordHash(passwordHash);
-            user.setRole(role);
+    public void update(String username, String passwordHash, String role){
+        if(username != null){
+            setUsername(username);
         }
-        else{
-            System.out.println("User value is null");
-        }
-    }
 
-    public static void addStaff(User staff) {
-        if(staff == null){
-            System.out.println("User is null. Was not added to Map and List");
-            return;
+        if(passwordHash != null){
+            setPasswordHash(passwordHash);
         }
-        if(staff.isStaff()){
-            if(!containsStaff(staff.getID())){
-                staffs.put(staff.getID(), staff);
-                staffList.add(staff);
-                System.out.println("User's role is STAFF");
-            }
-            else{
-                System.out.println("Staff is already present!");
-            }
-        }
-        else{
-            System.out.println("User's role is ADMIN");
-        }
-    }
 
-    public static void removeStaff(User staff) {
-        if(isValidStaff(staff)){
-            staffList.remove(staff);
-            staffs.remove(staff.getID());
+        if(role != null){
+            setRole(role);
         }
-        else{
-            System.out.println("Staff ID not found");
-        }
-    }
-
-    public static User getStaff(Integer staffId) {
-        if(containsStaff(staffId)){
-            return staffs.get(staffId);
-        }
-        else{
-            System.out.println("Staff ID not found. Null was returned");
-            return null;
-        }
-    }
-
-    public static boolean isValidStaff(User staff){
-        return staff != null && containsStaff(staff.getID());
-    }
-
-    public static boolean containsStaff(Integer staffID) {
-        return staffs.containsKey(staffID);
-    }
-
-    public static ObservableList<User> getStaffList(){
-        return staffList;
-    }
-
-    public static void emptyStaff() {
-        staffs.clear();
-        staffList.clear();
     }
 }

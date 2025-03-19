@@ -114,6 +114,16 @@ public class Furniture {
         return Integer.hashCode(getID());
     }
 
+    public void update(Integer roomID, String furnitureCondition) {
+        if(roomID != null){
+            setRoomID(roomID);
+        }
+
+        if(furnitureCondition != null){
+            setFurnitureCondition(furnitureCondition);
+        }
+    }
+
     // Convert Furniture -> FurnitureDTO
     public FurnitureDTO toDTO() {
         if(getID() == 0) {
@@ -145,17 +155,6 @@ public class Furniture {
             else{
                 System.out.println("Furniture is already present!");
             }
-        }
-    }
-
-    public static void update(Furniture furniture, Integer roomID, String furnitureType, String furnitureCondition) {
-        if(furniture != null){
-            furniture.setRoomID(roomID);
-            furniture.setFurnitureType(furnitureType);
-            furniture.setFurnitureCondition(furnitureCondition);
-        }
-        else{
-            System.out.println("Furniture value is null");
         }
     }
 
