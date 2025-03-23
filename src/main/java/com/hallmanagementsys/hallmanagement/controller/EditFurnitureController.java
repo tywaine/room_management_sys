@@ -54,7 +54,7 @@ public class EditFurnitureController implements Initializable {
             return false;
         }
 
-        String furnitureType = furniture.getFurnitureType().trim();
+        String furnitureType = furniture.getFurnitureType();
         String furnitureCondition = furniture.getFurnitureCondition();
 
         if (txtFurnitureType.getText().equals(furnitureType) && choiceBoxCondition.getValue().equals(furnitureCondition)) {

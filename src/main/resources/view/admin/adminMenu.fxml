@@ -29,7 +29,7 @@
             <children>
 
                 <!-- Sign Out Button -->
-                <Button fx:id="btnSignOut" layoutY="247.0" prefWidth="109.0" styleClass="signout_button" text="Sign Out" />
+                <Button fx:id="btnSignOut" layoutY="247.0" prefWidth="109.0" styleClass="signout_button" text="Sign Out" AnchorPane.bottomAnchor="13.5" />
             </children>
         </AnchorPane>
     </children>

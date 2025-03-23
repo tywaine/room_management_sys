@@ -31,7 +31,6 @@ public class ViewFurnitureController implements Initializable {
     public TableColumn<Furniture, Void> columnDelete;
     public Button btnAddFurniture;
     public TextField txtSearchRoom, txtSearchFurniture, txtRoomNumber;
-    public Label lblTypeError;
     public ChoiceBox<String> choiceBoxCondition, choiceBoxType;
 
     private FilteredList<Room> filteredRoomList;
@@ -43,7 +42,6 @@ public class ViewFurnitureController implements Initializable {
 
     private static final String FURNITURE_TOPIC_UPDATE = "/topic/furnitureUpdates"; // Ensure this matches backend
     private static final String FURNITURE_TOPIC_DELETE = "/topic/furnitureDeletes";
-
     private final MyWebSocketClient webSocketClient = Model.getInstance().getWebSocketClient();
 
     @Override
@@ -358,7 +356,7 @@ public class ViewFurnitureController implements Initializable {
                             " condition" + " has been added to room " + selectedRoom.getRoomNumber() + ".");
         }
         else{
-            MyAlert.showAlert(Alert.AlertType.INFORMATION, "Error Adding Furniture",
+            MyAlert.showAlert(Alert.AlertType.ERROR, "Error Adding Furniture",
                     "Furniture type " + furnitureType + " with a " + furnitureCondition +
                             " condition" + " was not added to room " + selectedRoom.getRoomNumber() + "!!!");
         }

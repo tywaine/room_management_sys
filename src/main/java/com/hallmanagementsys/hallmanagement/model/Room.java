@@ -143,6 +143,11 @@ public class Room {
         setTotalFurniture(furnitureList.size());
     }
 
+    public void emptyFurnitureList() {
+        furnitureList.clear();
+        setTotalFurniture(0);
+    }
+
     public void addOccupant(Occupant occupant) {
         occupantList.add(occupant);
         setCurrentOccupants(occupantList.size());
@@ -151,6 +156,11 @@ public class Room {
     public void removeOccupant(Occupant occupant) {
         occupantList.remove(occupant);
         setCurrentOccupants(occupantList.size());
+    }
+
+    public void emptyOccupantList() {
+        occupantList.clear();
+        setCurrentOccupants(0);
     }
 
     public ObservableList<Furniture> getFurnitureList() {
@@ -240,5 +250,12 @@ public class Room {
 
     public static ObservableList<Room> getList(){
         return roomList;
+    }
+
+    public static void emptyFurnitureAndOccupants() {
+        for(Room room : roomList){
+            room.emptyFurnitureList();
+            room.emptyOccupantList();
+        }
     }
 }

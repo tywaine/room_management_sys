@@ -1,5 +1,6 @@
 package com.hallmanagementsys.hallmanagement.websocket;
 
+import com.hallmanagementsys.hallmanagement.util.Json;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.*;
 import org.springframework.web.socket.client.WebSocketClient;
@@ -25,7 +26,12 @@ public class MyWebSocketClient {
         transports.add(new WebSocketTransport(new StandardWebSocketClient()));
         WebSocketClient client = new SockJsClient(transports);
         this.stompClient = new WebSocketStompClient(client);
-        this.stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+
+        // Use your custom ObjectMapper from Json utility class
+        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        converter.setObjectMapper(Json.getDefaultObjectMapper());
+
+        this.stompClient.setMessageConverter(converter);
     }
 
     public static synchronized MyWebSocketClient getInstance() {
@@ -40,7 +46,7 @@ public class MyWebSocketClient {
             stompSession = stompClient.connectAsync(WEBSOCKET_URL, new StompSessionHandlerAdapter() {
                 @Override
                 public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
-                    System.out.println("Connected to WebSocket server");
+                    System.out.println("Connected to WebSocket");
                 }
 
                 @Override
@@ -51,7 +57,7 @@ public class MyWebSocketClient {
             }).get();
         }
         catch (Exception e) {
-            System.err.println("Error connecting to WebSocket server: " + e.getMessage());
+            System.err.println("Error connecting to WebSocket: " + e.getMessage());
         }
     }
 
@@ -77,14 +83,14 @@ public class MyWebSocketClient {
             System.out.println("Message sent to " + destination);
         }
         else {
-            System.err.println("Not connected to WebSocket server");
+            System.err.println("Not connected to WebSocket");
         }
     }
 
     public void disconnect() {
         if (stompSession != null && stompSession.isConnected()) {
             stompSession.disconnect();
-            System.out.println("Disconnected from WebSocket server");
+            System.out.println("Disconnected from WebSocket");
         }
     }
 }

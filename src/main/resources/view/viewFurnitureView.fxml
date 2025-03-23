@@ -10,39 +10,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="900.0" prefWidth="1125.0" stylesheets="@../css/viewFurniture.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hallmanagementsys.hallmanagement.controller.ViewFurnitureController">
-
-    <HBox layoutX="10.0" layoutY="10.0" prefHeight="620.0" prefWidth="1108.0" spacing="10.0" AnchorPane.bottomAnchor="132.0" AnchorPane.rightAnchor="0.0">
-        <VBox spacing="5.0">
-            <!-- ListView for Room Numbers -->
-            <ListView fx:id="listViewRooms" prefHeight="610.0" prefWidth="120.0" />
-        </VBox>
-
-        <VBox prefHeight="586.0" prefWidth="977.0" spacing="10.0">
-
-            <!-- TableView for Furniture -->
-            <TableView fx:id="tableViewFurniture" prefHeight="686.0" prefWidth="977.0">
-                <columns>
-               <TableColumn fx:id="columnFurnitureId" prefWidth="89.0" text="ID" />
-                    <TableColumn fx:id="columnFurnitureType" prefWidth="300.0" text="Furniture Type" />
-                    <TableColumn fx:id="columnFurnitureCondition" prefWidth="266.0" text="Furniture Condition" />
-                    <TableColumn fx:id="columnEdit" prefWidth="141.0" text="Edit" />
-               <TableColumn fx:id="columnDelete" prefWidth="140.0" text="Delete" />
-                </columns>
-            </TableView>
-
-            <!-- Input Fields and Buttons -->
-            <HBox spacing="10.0" />
-        </VBox>
-    </HBox>
       <!-- Search Field for Furniture (Fixed Size) -->
-      <TextField fx:id="txtSearchFurniture" layoutX="851.0" layoutY="91.0" prefHeight="26.0" prefWidth="260.0" promptText="Search Furniture" />
-       <Button fx:id="btnAddFurniture" layoutX="925.0" layoutY="802.0" onAction="#addFurniture" text="Add Furniture" />
-   <Label layoutX="465.0" layoutY="775.0" prefHeight="20.0" prefWidth="200.0" text="Furniture Type">
+      <TextField fx:id="txtSearchFurniture" layoutX="851.0" layoutY="91.0" prefHeight="26.0" prefWidth="260.0" promptText="Search Furniture" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="91.0" />
+       <Button fx:id="btnAddFurniture" layoutX="925.0" layoutY="802.0" onAction="#addFurniture" text="Add Furniture" AnchorPane.bottomAnchor="64.0" />
+   <Label layoutX="465.0" layoutY="775.0" prefHeight="20.0" prefWidth="200.0" text="Furniture Type" AnchorPane.bottomAnchor="105.0">
       <font>
          <Font name="System Bold Italic" size="16.0" />
       </font>
@@ -52,31 +26,43 @@
          <Font name="System Bold" size="32.0" />
       </font>
    </Label>
-   <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="857.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="857.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="105.0">
       <image>
          <Image url="@../img/searchgrey.png" />
       </image>
    </ImageView>
       <!-- Search Field for Room Numbers (Fixed Size) -->
-      <TextField fx:id="txtSearchRoom" layoutX="14.0" layoutY="91.0" prefHeight="42.0" prefWidth="132.0" promptText="Search Room" />
-   <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="23.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="txtSearchRoom" layoutX="14.0" layoutY="92.0" prefHeight="42.0" prefWidth="132.0" promptText="Search Room" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="92.0" />
+   <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="23.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="104.0">
       <image>
          <Image url="@../img/searchgrey.png" />
       </image>
    </ImageView>
-   <Label layoutX="715.0" layoutY="775.0" prefHeight="20.0" prefWidth="170.0" text="Furniture Condition">
+   <Label layoutX="715.0" layoutY="775.0" prefHeight="20.0" prefWidth="170.0" text="Furniture Condition" AnchorPane.bottomAnchor="105.0">
       <font>
          <Font name="System Bold Italic" size="16.0" />
       </font>
    </Label>
-   <Label fx:id="lblTypeError" layoutX="463.0" layoutY="839.0" prefHeight="17.0" prefWidth="200.0" textFill="RED" />
-   <ChoiceBox fx:id="choiceBoxCondition" layoutX="712.0" layoutY="800.0" prefWidth="170.0" />
-   <TextField fx:id="txtRoomNumber" editable="false" layoutX="236.0" layoutY="800.0" promptText="Room Number" />
-   <Label layoutX="236.0" layoutY="775.0" prefHeight="20.0" prefWidth="200.0" text="Room Number">
+   <ChoiceBox fx:id="choiceBoxCondition" layoutX="712.0" layoutY="800.0" prefWidth="170.0" AnchorPane.bottomAnchor="61.0" />
+   <TextField fx:id="txtRoomNumber" editable="false" layoutX="236.0" layoutY="800.0" promptText="Room Number" AnchorPane.bottomAnchor="62.0" />
+   <Label layoutX="236.0" layoutY="775.0" prefHeight="20.0" prefWidth="200.0" text="Room Number" AnchorPane.bottomAnchor="105.0">
       <font>
          <Font name="System Bold Italic" size="16.0" />
       </font>
    </Label>
-   <ChoiceBox fx:id="choiceBoxType" layoutX="463.0" layoutY="800.0" prefWidth="170.0" />
+   <ChoiceBox fx:id="choiceBoxType" layoutX="463.0" layoutY="800.0" prefWidth="170.0" AnchorPane.bottomAnchor="61.0" />
+
+      <!-- TableView for Furniture -->
+      <TableView fx:id="tableViewFurniture" layoutX="145.0" layoutY="145.0" prefHeight="610.0" prefWidth="977.0" AnchorPane.bottomAnchor="145.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="145.0">
+          <columns>
+         <TableColumn fx:id="columnFurnitureId" prefWidth="89.0" text="ID" />
+              <TableColumn fx:id="columnFurnitureType" prefWidth="300.0" text="Furniture Type" />
+              <TableColumn fx:id="columnFurnitureCondition" prefWidth="266.0" text="Furniture Condition" />
+              <TableColumn fx:id="columnEdit" prefWidth="141.0" text="Edit" />
+         <TableColumn fx:id="columnDelete" prefWidth="140.0" text="Delete" />
+          </columns>
+      </TableView>
+      <!-- ListView for Room Numbers -->
+      <ListView fx:id="listViewRooms" layoutX="14.0" layoutY="145.0" prefHeight="610.0" prefWidth="120.0" AnchorPane.bottomAnchor="145.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="145.0" />
 
 </AnchorPane>

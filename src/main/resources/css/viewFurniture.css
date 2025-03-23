@@ -100,14 +100,6 @@
     -fx-border-width: 0;
 }
 
-/*
-.list-view:focused {
-    -fx-border-color: #2196F3;
-    -fx-effect: dropshadow(gaussian, rgba(33, 150, 243, 0.1), 0, 0, 0, 4);
-}
-
- */
-
 /* Search Bar */
 #txtSearchFurniture, #txtSearchRoom {
     -fx-background-color: #ffffff;
@@ -120,7 +112,7 @@
     -fx-prompt-text-fill: #888888;
 }
 
-#txtFurnitureType, #txtFurnitureCondition, #txtRoomNumber {
+#txtFurnitureType, #txtRoomNumber {
     -fx-background-color: #ffffff;
     -fx-background-radius: 8;
     -fx-border-color: #E0E0E0;
@@ -128,11 +120,6 @@
     -fx-border-width: 2;
     -fx-padding: 8 12 8 12;
     -fx-font-size: 14px;
-}
-
-#txtFurnitureCondition:hover {
-    -fx-border-color: #BDBDBD;
-    -fx-background-color: #FAFAFA;
 }
 
 /* Button Styling */

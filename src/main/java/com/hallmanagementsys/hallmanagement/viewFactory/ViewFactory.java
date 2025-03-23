@@ -3,20 +3,24 @@ package com.hallmanagementsys.hallmanagement.viewFactory;
 import com.hallmanagementsys.hallmanagement.controller.EditFurnitureController;
 import com.hallmanagementsys.hallmanagement.controller.LoginController;
 import com.hallmanagementsys.hallmanagement.controller.admin.AdminController;
+import com.hallmanagementsys.hallmanagement.controller.admin.EditOccupantController;
 import com.hallmanagementsys.hallmanagement.controller.staff.StaffController;
 import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
 import com.hallmanagementsys.hallmanagement.enums.StaffMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
 import com.hallmanagementsys.hallmanagement.model.Model;
+import com.hallmanagementsys.hallmanagement.model.Occupant;
 import com.hallmanagementsys.hallmanagement.service.UserService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
@@ -163,7 +167,7 @@ public class ViewFactory {
 
     public void showLoginWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/loginView.fxml"));
-        createStage(loader);
+        createStage(loader, "Login");
     }
 
     public void decideWhatToShow(){
@@ -184,7 +188,7 @@ public class ViewFactory {
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("Room Inventory Management");
+            stage.setTitle("Login");
             stage.setResizable(false);
 
             stage.setOnCloseRequest(event -> {
@@ -224,22 +228,63 @@ public class ViewFactory {
         }
     }
 
+    public boolean showEditOccupantDialog(Occupant occupant) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/editOccupantView.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Occupant");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+
+            EditOccupantController controller = loader.getController();
+            controller.setOccupant(occupant);
+
+            dialogStage.showAndWait();
+            return controller.isSaveClicked();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            MyAlert.showAlert(Alert.AlertType.ERROR, "Error",
+                    "Unexpected error occurred. Please try again later.");
+            return false;
+        }
+    }
+
     private void createStage(FXMLLoader loader){
-        try{
+        try {
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Room Inventory Management");
             stage.getScene().getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
 
+            // Get screen dimensions
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
+            // Set stage size to a percentage of screen size (e.g., 80% width, 80% height)
+            double stageWidth = screenBounds.getWidth() * 0.9;
+            double stageHeight = screenBounds.getHeight() * 0.9;
+
+            stage.setWidth(stageWidth);
+            stage.setHeight(stageHeight);
+
+            // Make stage resizable and define minimum size
+            stage.setResizable(true);
+            stage.setMinWidth(1375);
+            stage.setMinHeight(860);
+            stage.setMaxWidth(1375);
+
+            // On close logic
             stage.setOnCloseRequest(event -> {
                 onExit();
             });
 
             stage.show();
-            stage.setResizable(false);
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

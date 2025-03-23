@@ -119,5 +119,6 @@ public class Model {
     public void emptyData(){
         Furniture.emptyFurniture();
         Occupant.emptyOccupants();
+        Room.emptyFurnitureAndOccupants();
     }
 }

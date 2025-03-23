@@ -6,9 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Occupant {
     private final IntegerProperty id = new SimpleIntegerProperty();
@@ -19,6 +18,7 @@ public class Occupant {
     private final StringProperty phoneNumber = new SimpleStringProperty();
     private final IntegerProperty roomID = new SimpleIntegerProperty();
     private final ObjectProperty<LocalDateTime> dateAdded = new SimpleObjectProperty<>();
+    private final StringProperty dateAddedFormatted = new SimpleStringProperty();
     private static final Map<Integer, Occupant> occupants = new HashMap<>();
     private static final ObservableList<Occupant> occupantList = FXCollections.observableArrayList();
 
@@ -42,6 +42,8 @@ public class Occupant {
         setPhoneNumber(phoneNumber);
         setRoomID(roomID);
         setDateAdded(dateAdded);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        this.dateAddedFormatted.set(dateAdded.format(formatter));
 
         addOccupant(this);
     }
@@ -77,6 +79,10 @@ public class Occupant {
 
     public ObjectProperty<LocalDateTime> dateAddedProperty() {
         return dateAdded;
+    }
+
+    public StringProperty dateAddedFormattedProperty() {
+        return dateAddedFormatted;
     }
 
     // Getters
@@ -218,6 +224,88 @@ public class Occupant {
         return new Occupant(dto.getId(), dto.getFirstName(), dto.getLastName(), dto.getIdNumber(), dto.getEmail(), dto.getPhoneNumber(), dto.getRoomID(), dto.getDateAdded());
     }
 
+    public static boolean isValidName(String name){
+        if(name == null || name.isEmpty()){
+            return false;
+        }
+
+        if(name.length() > 50){
+            return false;
+        }
+
+        return name.matches("^[A-Za-z]+$");
+    }
+
+    public static boolean isValidEmail(String email){
+        if(email == null || email.isEmpty()){
+            return false;
+        }
+
+        if(email.length() > 100){
+            return false;
+        }
+
+        return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    }
+
+    public static boolean isValidPhoneNumber(String phoneNumber){
+        if(phoneNumber == null || phoneNumber.isEmpty()){
+            return false;
+        }
+
+        return phoneNumber.matches("\\d{3}-\\d{4}");
+    }
+
+    public static boolean isValidIdNumber(String idNumber){
+        if(idNumber == null || idNumber.isEmpty()){
+            return false;
+        }
+
+        return  idNumber.matches("\\d{9}");
+    }
+
+    public static boolean idNumberExist(String idNumber){
+        if(idNumber == null || idNumber.isEmpty()){
+            return false;
+        }
+
+        for(Occupant occupant: getList()){
+            if(occupant.getIdNumber().equals(idNumber)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean emailExist(String email){
+        if(email == null || email.isEmpty()){
+            return false;
+        }
+
+        for(Occupant occupant: getList()){
+            if(occupant.getEmail().equals(email)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean phoneNumberExist(String phoneNumber){
+        if(phoneNumber == null || phoneNumber.isEmpty()){
+            return false;
+        }
+
+        for(Occupant occupant: getList()){
+            if(occupant.getPhoneNumber().equals(phoneNumber)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static void addOccupant(Occupant occupant) {
         if(occupant == null){
             System.out.println("Occupant is null. Was not added to Map and List");
@@ -226,6 +314,7 @@ public class Occupant {
             if(!containsOccupant(occupant.getID())){
                 occupants.put(occupant.getID(), occupant);
                 occupantList.add(occupant);
+
                 Room room = Room.getRoom(occupant.getRoomID());
 
                 if(Room.isValidRoom(room)){
@@ -242,6 +331,7 @@ public class Occupant {
         if(isValidOccupant(occupant)){
             occupantList.remove(occupant);
             occupants.remove(occupant.getID());
+
             Room room = Room.getRoom(occupant.getRoomID());
 
             if(Room.isValidRoom(room)){
@@ -261,6 +351,51 @@ public class Occupant {
             System.out.println("Occupant ID not found. Null was returned");
             return null;
         }
+    }
+
+    public static Occupant getOccupantByIdNumber(String idNumber){
+        if(idNumber == null || idNumber.isEmpty()){
+            return null;
+        }
+        else{
+            for(Occupant occupant: occupantList){
+                if(occupant.getIdNumber().equals(idNumber)){
+                    return occupant;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static Occupant getOccupantByEmail(String email) {
+        if(email == null || email.isEmpty()){
+            return null;
+        }
+        else{
+            for(Occupant occupant: occupantList){
+                if(occupant.getEmail().equals(email)){
+                    return occupant;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static Occupant getOccupantByPhoneNumber(String phoneNumber) {
+        if(phoneNumber == null || phoneNumber.isEmpty()){
+            return null;
+        }
+        else{
+            for(Occupant occupant: occupantList){
+                if(occupant.getPhoneNumber().equals(phoneNumber)){
+                    return occupant;
+                }
+            }
+        }
+
+        return null;
     }
 
     public static boolean isValidOccupant(Occupant occupant) {
