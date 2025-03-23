@@ -308,7 +308,7 @@ public class ManageOccupantsController implements Initializable {
     }
 
     private void handleIdNumberError(){
-        String idNumber = txtIdNumber.getText();
+        String idNumber = txtIdNumber.getText().trim();
 
         if(!idNumber.isEmpty()){
             if(Occupant.isValidIdNumber(idNumber)){
@@ -334,7 +334,7 @@ public class ManageOccupantsController implements Initializable {
     }
 
     private void handleNameError(TextField txtName, Label lblNameError) {
-        String firstName = txtName.getText();
+        String firstName = txtName.getText().trim();
 
         if(!firstName.isEmpty()){
             if(Occupant.isValidName(firstName)){
@@ -357,7 +357,7 @@ public class ManageOccupantsController implements Initializable {
     }
 
     private void handleEmailError(){
-        String email = txtEmail.getText();
+        String email = txtEmail.getText().trim();
 
         if(!email.isEmpty()){
             if(Occupant.isValidEmail(email)){
@@ -380,7 +380,7 @@ public class ManageOccupantsController implements Initializable {
     }
 
     private void handlePhoneNumberError(){
-        String phoneNumber = txtPhoneNumber.getText();
+        String phoneNumber = txtPhoneNumber.getText().trim();
 
         if(!phoneNumber.isEmpty()){
             if(Occupant.isValidPhoneNumber(phoneNumber)){
