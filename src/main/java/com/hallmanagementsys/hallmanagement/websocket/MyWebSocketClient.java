@@ -27,7 +27,6 @@ public class MyWebSocketClient {
         WebSocketClient client = new SockJsClient(transports);
         this.stompClient = new WebSocketStompClient(client);
 
-        // Use your custom ObjectMapper from Json utility class
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setObjectMapper(Json.getDefaultObjectMapper());
 

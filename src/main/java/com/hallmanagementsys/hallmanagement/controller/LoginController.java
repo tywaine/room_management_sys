@@ -4,6 +4,7 @@ import com.hallmanagementsys.hallmanagement.enums.PreferenceKeys;
 import com.hallmanagementsys.hallmanagement.model.*;
 import com.hallmanagementsys.hallmanagement.service.UserService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -124,15 +125,15 @@ public class LoginController implements Initializable {
     }
 
     private void showCorrectWindow(String email, String password, Stage stage, String role) {
-        Model.getInstance().getViewFactory().closeStage(stage);
+        ViewFactory.getInstance().closeStage(stage);
 
         if ("ADMIN".equals(role)) {
             saveCredentials(email, password);
-            Model.getInstance().getViewFactory().showAdminWindow();
+            ViewFactory.getInstance().showAdminWindow();
         }
         else if ("STAFF".equals(role)) {
             saveCredentials(email, password);
-            Model.getInstance().getViewFactory().showStaffWindow();
+            ViewFactory.getInstance().showStaffWindow();
         }
         else {
             MyAlert.showAlert(Alert.AlertType.ERROR, "There is no User other than Admin and Staff", "How did this happen?????");

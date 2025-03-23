@@ -3,6 +3,7 @@ package com.hallmanagementsys.hallmanagement.controller.staff;
 import com.hallmanagementsys.hallmanagement.controller.LoginController;
 import com.hallmanagementsys.hallmanagement.enums.StaffMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Model;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.Initializable;
@@ -52,7 +53,7 @@ public class StaffMenuController implements Initializable {
         button.setOnAction(event -> {
             clearButtonStyles();
             button.getStyleClass().add("button-selected");
-            Model.getInstance().getViewFactory().getStaffSelectedMenuItem().set(menuOption);
+            ViewFactory.getInstance().getStaffSelectedMenuItem().set(menuOption);
         });
     }
 
@@ -66,10 +67,10 @@ public class StaffMenuController implements Initializable {
 
     private void onSignOut(){
         Stage stage = (Stage) btnOccupants.getScene().getWindow();
-        Model.getInstance().getViewFactory().closeStage(stage);
+        ViewFactory.getInstance().closeStage(stage);
         LoginController.removeCredentials();
         Model.getInstance().emptyData();
-        Model.getInstance().getViewFactory().resetStaffViews();
-        Model.getInstance().getViewFactory().showLoginWindow();
+        ViewFactory.getInstance().resetStaffViews();
+        ViewFactory.getInstance().showLoginWindow();
     }
 }

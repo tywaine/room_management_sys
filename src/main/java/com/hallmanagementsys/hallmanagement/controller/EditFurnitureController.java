@@ -1,9 +1,8 @@
 package com.hallmanagementsys.hallmanagement.controller;
 
 import com.hallmanagementsys.hallmanagement.model.Furniture;
-import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Room;
-import com.hallmanagementsys.hallmanagement.service.FurnitureService;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -77,7 +76,7 @@ public class EditFurnitureController implements Initializable {
 
     private void closeDialog() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
-        Model.getInstance().getViewFactory().closeStage(stage);
+        ViewFactory.getInstance().closeStage(stage);
     }
 
     public boolean isSaveClicked() {

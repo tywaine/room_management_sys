@@ -1,7 +1,6 @@
 package com.hallmanagementsys.hallmanagement.model;
 
 import com.hallmanagementsys.hallmanagement.service.*;
-import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import com.hallmanagementsys.hallmanagement.websocket.MyWebSocketClient;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -10,13 +9,10 @@ import java.util.function.Consumer;
 
 public class Model {
     private static Model model;
-    private final ViewFactory viewFactory;
     private User user;
-    private final MyWebSocketClient webSocketClient = MyWebSocketClient.getInstance();
 
     private Model(){
-        this.viewFactory = ViewFactory.getInstance();
-        webSocketClient.connect();
+        MyWebSocketClient.getInstance().connect();
     }
 
     public static synchronized Model getInstance(){
@@ -33,14 +29,6 @@ public class Model {
 
     public void setCurrentUser(User user) {
         this.user = user;
-    }
-
-    public ViewFactory getViewFactory(){
-        return viewFactory;
-    }
-
-    public MyWebSocketClient getWebSocketClient() {
-        return webSocketClient;
     }
 
     // Load static data into a separate thread

@@ -3,6 +3,7 @@ package com.hallmanagementsys.hallmanagement.controller.admin;
 import com.hallmanagementsys.hallmanagement.controller.LoginController;
 import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Model;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -52,7 +53,7 @@ public class AdminMenuController implements Initializable {
         button.setOnAction(event -> {
             clearButtonStyles();
             button.getStyleClass().add("button-selected");
-            Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(menuOption);
+            ViewFactory.getInstance().getAdminSelectedMenuItem().set(menuOption);
         });
     }
 
@@ -66,10 +67,10 @@ public class AdminMenuController implements Initializable {
 
     private void onSignOut(){
         Stage stage = (Stage) btnOccupants.getScene().getWindow();
-        Model.getInstance().getViewFactory().closeStage(stage);
+        ViewFactory.getInstance().closeStage(stage);
         LoginController.removeCredentials();
         Model.getInstance().emptyData();
-        Model.getInstance().getViewFactory().resetAdminViews();
-        Model.getInstance().getViewFactory().showLoginWindow();
+        ViewFactory.getInstance().resetAdminViews();
+        ViewFactory.getInstance().showLoginWindow();
     }
 }

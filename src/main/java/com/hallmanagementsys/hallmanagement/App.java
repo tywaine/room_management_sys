@@ -1,6 +1,7 @@
 package com.hallmanagementsys.hallmanagement;
 
 import com.hallmanagementsys.hallmanagement.model.Model;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -15,7 +16,7 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         Model.getInstance().loadStaticData(() ->
                 Platform.runLater(() ->
-                        Model.getInstance().getViewFactory().decideWhatToShow()
+                        ViewFactory.getInstance().decideWhatToShow()
                 )
         );
     }

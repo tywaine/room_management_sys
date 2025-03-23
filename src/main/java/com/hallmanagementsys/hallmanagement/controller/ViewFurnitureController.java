@@ -3,10 +3,10 @@ package com.hallmanagementsys.hallmanagement.controller;
 import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureDeleteMessage;
 import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureUpdateMessage;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
-import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Room;
 import com.hallmanagementsys.hallmanagement.service.FurnitureService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import com.hallmanagementsys.hallmanagement.websocket.MyWebSocketClient;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -42,7 +42,7 @@ public class ViewFurnitureController implements Initializable {
 
     private static final String FURNITURE_TOPIC_UPDATE = "/topic/furnitureUpdates"; // Ensure this matches backend
     private static final String FURNITURE_TOPIC_DELETE = "/topic/furnitureDeletes";
-    private final MyWebSocketClient webSocketClient = Model.getInstance().getWebSocketClient();
+    private final MyWebSocketClient webSocketClient = MyWebSocketClient.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -304,7 +304,7 @@ public class ViewFurnitureController implements Initializable {
     }
 
     private void editFurniture(Furniture furniture) {
-        boolean saveClicked = Model.getInstance().getViewFactory().showEditFurnitureDialog(furniture);
+        boolean saveClicked = ViewFactory.getInstance().showEditFurnitureDialog(furniture);
 
         if (saveClicked) {
             if(furnitureService.updateFurniture(furniture)){

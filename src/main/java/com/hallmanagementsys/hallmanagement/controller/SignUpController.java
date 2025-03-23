@@ -1,12 +1,11 @@
 package com.hallmanagementsys.hallmanagement.controller;
 
-import com.hallmanagementsys.hallmanagement.dto.UserDTO;
 import com.hallmanagementsys.hallmanagement.util.HttpStatus;
-import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.User;
 import com.hallmanagementsys.hallmanagement.service.UserService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
 import com.hallmanagementsys.hallmanagement.util.MyBCrypt;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -102,8 +101,8 @@ public class SignUpController implements Initializable {
             if (response.statusCode() == HttpStatus.CREATED) { // User created successfully
                 MyAlert.showAlert(Alert.AlertType.INFORMATION, "Successfully created User", "User was created successfully");
                 Stage stage = (Stage) lblUsernameError.getScene().getWindow();
-                Model.getInstance().getViewFactory().closeStage(stage);
-                Model.getInstance().getViewFactory().showLoginWindow();
+                ViewFactory.getInstance().closeStage(stage);
+                ViewFactory.getInstance().showLoginWindow();
                 MyAlert.showAlert(Alert.AlertType.INFORMATION, "Login Information", "Your Login information is:\n" +
                         "Username: " + username + "\nPassword: <password you entered>");
             }

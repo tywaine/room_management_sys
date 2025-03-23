@@ -2,11 +2,11 @@ package com.hallmanagementsys.hallmanagement.controller.admin;
 
 import com.hallmanagementsys.hallmanagement.dto.msg.OccupantDeleteMessage;
 import com.hallmanagementsys.hallmanagement.dto.msg.OccupantUpdateMessage;
-import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Occupant;
 import com.hallmanagementsys.hallmanagement.model.Room;
 import com.hallmanagementsys.hallmanagement.service.OccupantService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import com.hallmanagementsys.hallmanagement.websocket.MyWebSocketClient;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -45,7 +45,7 @@ public class ManageOccupantsController implements Initializable {
 
     private static final String OCCUPANT_TOPIC_UPDATE = "/topic/occupantUpdates"; // Ensure this matches backend
     private static final String OCCUPANT_TOPIC_DELETE = "/topic/occupantDeletes";
-    private final MyWebSocketClient webSocketClient = Model.getInstance().getWebSocketClient();
+    private final MyWebSocketClient webSocketClient = MyWebSocketClient.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -291,7 +291,7 @@ public class ManageOccupantsController implements Initializable {
     }
 
     private void editOccupant(Occupant occupant) {
-        boolean saveClicked = Model.getInstance().getViewFactory().showEditOccupantDialog(occupant);
+        boolean saveClicked = ViewFactory.getInstance().showEditOccupantDialog(occupant);
 
         if (saveClicked) {
             if(occupantService.updateOccupant(occupant)){

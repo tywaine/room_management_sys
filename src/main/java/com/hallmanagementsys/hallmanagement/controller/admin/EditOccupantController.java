@@ -1,9 +1,9 @@
 package com.hallmanagementsys.hallmanagement.controller.admin;
 
-import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Occupant;
 import com.hallmanagementsys.hallmanagement.model.Room;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -217,7 +217,7 @@ public class EditOccupantController implements Initializable {
 
     private void closeDialog() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
-        Model.getInstance().getViewFactory().closeStage(stage);
+        ViewFactory.getInstance().closeStage(stage);
     }
 
     public boolean isSaveClicked() {

@@ -8,10 +8,10 @@ import com.hallmanagementsys.hallmanagement.controller.staff.StaffController;
 import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
 import com.hallmanagementsys.hallmanagement.enums.StaffMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
-import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Occupant;
 import com.hallmanagementsys.hallmanagement.service.UserService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
+import com.hallmanagementsys.hallmanagement.websocket.MyWebSocketClient;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
@@ -310,7 +310,7 @@ public class ViewFactory {
 
     private void onExit() {
         System.out.println("Application is closing...");
-        Model.getInstance().getWebSocketClient().disconnect();
+        MyWebSocketClient.getInstance().disconnect();
     }
 
     public void closeStage(Stage stage){

@@ -1,6 +1,6 @@
 package com.hallmanagementsys.hallmanagement.controller.admin;
 
-import com.hallmanagementsys.hallmanagement.model.Model;
+import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 
@@ -12,14 +12,14 @@ public class AdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().addListener(
+        ViewFactory.getInstance().getAdminSelectedMenuItem().addListener(
                 (observableValue, oldVal, newVal) -> {
                     switch(newVal){
-                        case FURNITURE -> adminParent.setCenter(Model.getInstance().getViewFactory().getViewFurnitureView());
-                        case OCCUPANTS -> adminParent.setCenter(Model.getInstance().getViewFactory().getManageOccupantsView());
-                        case REPORT -> adminParent.setCenter(Model.getInstance().getViewFactory().getGenerateReportView());
-                        case ACCOUNT -> adminParent.setCenter(Model.getInstance().getViewFactory().getAccountView());
-                        default -> adminParent.setCenter(Model.getInstance().getViewFactory().getDisplayRoomsView());
+                        case FURNITURE -> adminParent.setCenter(ViewFactory.getInstance().getViewFurnitureView());
+                        case OCCUPANTS -> adminParent.setCenter(ViewFactory.getInstance().getManageOccupantsView());
+                        case REPORT -> adminParent.setCenter(ViewFactory.getInstance().getGenerateReportView());
+                        case ACCOUNT -> adminParent.setCenter(ViewFactory.getInstance().getAccountView());
+                        default -> adminParent.setCenter(ViewFactory.getInstance().getDisplayRoomsView());
                     }
                 }
         );
