@@ -1,12 +1,12 @@
 package com.hallmanagementsys.hallmanagement.model;
 
 import com.hallmanagementsys.hallmanagement.dto.OccupantDTO;
+import com.hallmanagementsys.hallmanagement.util.DateTimeUtil;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Occupant {
@@ -42,8 +42,8 @@ public class Occupant {
         setPhoneNumber(phoneNumber);
         setRoomID(roomID);
         setDateAdded(dateAdded);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        this.dateAddedFormatted.set(dateAdded.format(formatter));
+
+        this.dateAddedFormatted.set(DateTimeUtil.formatPretty(dateAdded));
 
         addOccupant(this);
     }

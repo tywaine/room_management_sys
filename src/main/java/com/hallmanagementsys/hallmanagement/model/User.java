@@ -1,14 +1,10 @@
 package com.hallmanagementsys.hallmanagement.model;
 
 import com.hallmanagementsys.hallmanagement.dto.UserDTO;
+import com.hallmanagementsys.hallmanagement.util.DateTimeUtil;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class User {
@@ -33,8 +29,8 @@ public class User {
         setPasswordHash(passwordHash);
         setRole(role);
         setCreatedAt(createdAt);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        this.createdAtFormatted.set(createdAt.format(formatter));
+
+        this.createdAtFormatted.set(DateTimeUtil.formatPretty(createdAt));
     }
 
     // Properties
