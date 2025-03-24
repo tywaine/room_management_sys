@@ -6,20 +6,18 @@ public class RoomDTO {
     private Integer id;
     private Integer blockID;
     private String roomNumber;
-    private Integer floor;
     private Integer maxOccupants;
 
     public RoomDTO(){}
 
-    public RoomDTO(Integer id, Integer blockID, String roomNumber, Integer floor, Integer maxOccupants) {
+    public RoomDTO(Integer id, Integer blockID, String roomNumber, Integer maxOccupants) {
         this.id = id;
         this.blockID = blockID;
         this.roomNumber = roomNumber;
-        this.floor = floor;
         this.maxOccupants = maxOccupants;
 
         if(id != null) {
-            new Room(id, blockID, roomNumber, floor, maxOccupants);
+            new Room(id, blockID, roomNumber, maxOccupants);
         }
     }
 
@@ -47,14 +45,6 @@ public class RoomDTO {
         this.roomNumber = roomNumber;
     }
 
-    public Integer getFloor() {
-        return floor;
-    }
-
-    public void setFloor(Integer floor) {
-        this.floor = floor;
-    }
-
     public Integer getMaxOccupants() {
         return maxOccupants;
     }
@@ -69,7 +59,6 @@ public class RoomDTO {
                 "id=" + id +
                 ", blockID=" + blockID +
                 ", roomNumber='" + roomNumber + '\'' +
-                ", floor=" + floor +
                 ", maxOccupants=" + maxOccupants +
                 '}';
     }

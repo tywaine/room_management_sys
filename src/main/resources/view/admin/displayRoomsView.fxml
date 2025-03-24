@@ -13,12 +13,11 @@
    <children>
       <TableView fx:id="tableViewRooms" layoutX="27.0" layoutY="68.0" prefHeight="749.0" prefWidth="1125.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="151.0">
         <columns>
-          <TableColumn fx:id="columnRoomNumber" prefWidth="214.0" text="Room Number" />
-          <TableColumn fx:id="columnBlock" minWidth="3.0" prefWidth="175.0" text="Block" />
-            <TableColumn fx:id="columnFloor" prefWidth="175.0" text="Floor" />
-            <TableColumn fx:id="columnMaxOccupants" prefWidth="188.0" text="Max Occupants" />
-            <TableColumn fx:id="columnCurrentOccupants" prefWidth="179.0" text="Current Occupants" />
-            <TableColumn fx:id="columnTotalFurniture" prefWidth="155.0" text="Total Furniture" />
+          <TableColumn fx:id="columnRoomNumber" prefWidth="255.0" text="Room Number" />
+          <TableColumn fx:id="columnBlock" minWidth="3.0" prefWidth="217.0" text="Block" />
+            <TableColumn fx:id="columnMaxOccupants" prefWidth="227.0" text="Max Occupants" />
+            <TableColumn fx:id="columnCurrentOccupants" prefWidth="198.0" text="Current Occupants" />
+            <TableColumn fx:id="columnTotalFurniture" prefWidth="194.0" text="Total Furniture" />
         </columns>
       </TableView>
       <Label alignment="CENTER" layoutX="548.0" layoutY="14.0" prefHeight="17.0" prefWidth="529.0" text="View Rooms" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

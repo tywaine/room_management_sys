@@ -14,7 +14,6 @@ public class DisplayRoomsController implements Initializable {
     public TableView<Room> tableViewRooms;
     public TableColumn<Room, String> columnRoomNumber;
     public TableColumn<Room, Character> columnBlock;
-    public TableColumn<Room, Integer> columnFloor;
     public TableColumn<Room, Integer> columnMaxOccupants;
     public TableColumn<Room, Integer> columnCurrentOccupants;
     public TableColumn<Room, Integer> columnTotalFurniture;
@@ -26,7 +25,6 @@ public class DisplayRoomsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         columnRoomNumber.setCellValueFactory(cellData -> cellData.getValue().roomNumberProperty());
         columnBlock.setCellValueFactory(cellData -> cellData.getValue().getBlockNameProperty());
-        columnFloor.setCellValueFactory(cellData -> cellData.getValue().floorProperty().asObject());
         columnMaxOccupants.setCellValueFactory(cellData -> cellData.getValue().maxOccupantsProperty().asObject());
         columnCurrentOccupants.setCellValueFactory(cellData -> cellData.getValue().currentOccupantsProperty().asObject());
         columnTotalFurniture.setCellValueFactory(cellData -> cellData.getValue().totalFurnitureProperty().asObject());
@@ -45,7 +43,6 @@ public class DisplayRoomsController implements Initializable {
             }
 
             return room.getRoomNumber().contains(searchText)
-                    || String.valueOf(room.getFloor()).toLowerCase().contains(searchText)
                     || String.valueOf(room.getMaxOccupants()).contains(searchText)
                     || String.valueOf(room.getCurrentOccupants()).contains(searchText)
                     || String.valueOf(room.getTotalFurniture()).contains(searchText);

@@ -7,7 +7,8 @@ public class MyUrl {
 
     public static String getUrl(){
         // change the returned url to whichever one you currently want to use.
-        return API_URL;
+        //return API_URL;
+        return LOCALHOST_API_URL;
     }
 
     public static String getTestUrl(){

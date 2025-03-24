@@ -13,7 +13,6 @@ public class Room {
     private final IntegerProperty id = new SimpleIntegerProperty();
     private final IntegerProperty blockID = new SimpleIntegerProperty(); // Using Character
     private final StringProperty roomNumber = new SimpleStringProperty();
-    private final IntegerProperty floor = new SimpleIntegerProperty();
     private final IntegerProperty maxOccupants = new SimpleIntegerProperty();
     private final IntegerProperty currentOccupants = new SimpleIntegerProperty();
     private final IntegerProperty totalFurniture = new SimpleIntegerProperty();
@@ -23,19 +22,17 @@ public class Room {
     private static final Map<Integer, Room> rooms = new HashMap<>();
     private static final ObservableList<Room> roomList = FXCollections.observableArrayList();
 
-    public Room(Integer blockID, String roomNumber, Integer floor, Integer maxOccupants) {
+    public Room(Integer blockID, String roomNumber, Integer maxOccupants) {
         this.id.set(0);
         this.blockID.set(blockID);
         this.roomNumber.set(roomNumber);
-        this.floor.set(floor);
         this.maxOccupants.set(maxOccupants);
     }
 
-    public Room(Integer id, Integer blockID, String roomNumber, Integer floor, Integer maxOccupants) {
+    public Room(Integer id, Integer blockID, String roomNumber, Integer maxOccupants) {
         this.id.set(id);
         this.blockID.set(blockID);
         this.roomNumber.set(roomNumber);
-        this.floor.set(floor);
         this.maxOccupants.set(maxOccupants);
 
         addRoom(this);
@@ -52,10 +49,6 @@ public class Room {
 
     public String getRoomNumber() {
         return roomNumber.get();
-    }
-
-    public Integer getFloor() {
-        return floor.get();
     }
 
     public Integer getMaxOccupants() {
@@ -83,10 +76,6 @@ public class Room {
         this.roomNumber.set(roomNumber);
     }
 
-    public void setFloor(Integer floor) {
-        this.floor.set(floor);
-    }
-
     public void setMaxOccupants(int maxOccupants) {
         this.maxOccupants.set(maxOccupants);
     }
@@ -110,10 +99,6 @@ public class Room {
 
     public StringProperty roomNumberProperty() {
         return roomNumber;
-    }
-
-    public IntegerProperty floorProperty() {
-        return floor;
     }
 
     public IntegerProperty maxOccupantsProperty() {
@@ -176,8 +161,7 @@ public class Room {
         return "Room{" +
                 "id=" + getID() +
                 ", blockID=" + getBlockID() +
-                ", roomNumber=" + getRoomNumber() +
-                ", floor=" + getFloor() +
+                ", roomNumber='" + getRoomNumber() + '\'' +
                 ", maxOccupants=" + getMaxOccupants() +
                 '}';
     }
@@ -204,15 +188,15 @@ public class Room {
     // Convert Room -> RoomDTO
     public RoomDTO toDTO() {
         if(getID() == 0) {
-            return new RoomDTO(null, getBlockID(), getRoomNumber(), getFloor(), getMaxOccupants());
+            return new RoomDTO(null, getBlockID(), getRoomNumber(), getMaxOccupants());
         }
 
-        return new RoomDTO(getID(), getBlockID(), getRoomNumber(), getFloor(), getMaxOccupants());
+        return new RoomDTO(getID(), getBlockID(), getRoomNumber(), getMaxOccupants());
     }
 
     // Convert RoomDTO -> Room
     public static Room fromDTO(RoomDTO dto) {
-        return new Room(dto.getId(), dto.getBlockID(), dto.getRoomNumber(), dto.getFloor(), dto.getMaxOccupants());
+        return new Room(dto.getId(), dto.getBlockID(), dto.getRoomNumber(), dto.getMaxOccupants());
     }
 
     public static void addRoom(Room room) {
