@@ -161,12 +161,8 @@ public class ViewFactory {
     }
 
     public void resetStaffViews(){
-        displayRoomsView = null;
         viewFurnitureView = null;
-        manageOccupantsView = null;
-        generateReportView = null;
         allFurnitureView = null;
-        accountView = null;
     }
 
     public void showAdminWindow(){

@@ -1,10 +1,11 @@
 package com.hallmanagementsys.hallmanagement.controller;
 
 import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
+import com.hallmanagementsys.hallmanagement.enums.StaffMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
+import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.viewFactory.ViewFactory;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -53,6 +54,11 @@ public class AllFurnitureController implements Initializable {
     }
 
     public void showViewFurnitureView() {
-        ViewFactory.getInstance().getAdminSelectedMenuItem().set(AdminMenuOptions.FURNITURE);
+        if(Model.getInstance().isCurrentUserAdmin()){
+            ViewFactory.getInstance().getAdminSelectedMenuItem().set(AdminMenuOptions.FURNITURE);
+        }
+        else{
+            ViewFactory.getInstance().getStaffSelectedMenuItem().set(StaffMenuOptions.FURNITURE);
+        }
     }
 }

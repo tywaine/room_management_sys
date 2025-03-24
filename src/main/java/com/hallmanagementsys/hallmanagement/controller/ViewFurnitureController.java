@@ -3,7 +3,9 @@ package com.hallmanagementsys.hallmanagement.controller;
 import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureDeleteMessage;
 import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureUpdateMessage;
 import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
+import com.hallmanagementsys.hallmanagement.enums.StaffMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
+import com.hallmanagementsys.hallmanagement.model.Model;
 import com.hallmanagementsys.hallmanagement.model.Room;
 import com.hallmanagementsys.hallmanagement.service.FurnitureService;
 import com.hallmanagementsys.hallmanagement.util.MyAlert;
@@ -365,6 +367,11 @@ public class ViewFurnitureController implements Initializable {
     }
 
     public void showAllFurnitureView() {
-        ViewFactory.getInstance().getAdminSelectedMenuItem().set(AdminMenuOptions.ALL_FURNITURE);
+        if(Model.getInstance().isCurrentUserAdmin()){
+            ViewFactory.getInstance().getAdminSelectedMenuItem().set(AdminMenuOptions.ALL_FURNITURE);
+        }
+        else{
+            ViewFactory.getInstance().getStaffSelectedMenuItem().set(StaffMenuOptions.ALL_FURNITURE);
+        }
     }
 }

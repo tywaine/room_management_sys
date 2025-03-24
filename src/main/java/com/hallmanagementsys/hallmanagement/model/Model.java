@@ -31,6 +31,14 @@ public class Model {
         this.user = user;
     }
 
+    public boolean isCurrentUserAdmin(){
+        if(user != null){
+            return user.isAdmin();
+        }
+
+        return false;
+    }
+
     // Load static data into a separate thread
     public void loadStaticData(Runnable onComplete){
         Task<Void> task = new Task<>() {
@@ -75,7 +83,10 @@ public class Model {
                 FurnitureService.getInstance().fetchFurniture();
                 updateProgress(1, steps);
 
-                OccupantService.getInstance().fetchOccupants();
+                if(isCurrentUserAdmin()){
+                    OccupantService.getInstance().fetchOccupants();
+                }
+
                 updateProgress(2, steps);
 
                 return null;

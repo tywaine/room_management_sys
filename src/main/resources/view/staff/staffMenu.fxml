@@ -16,21 +16,17 @@
         <Label alignment="CENTER" prefHeight="109.0" prefWidth="220.0" styleClass="admin_label" text="STAFF" textFill="#bbbbbb" />
 
         <!-- Menu Buttons -->
-        <VBox prefHeight="413.0" prefWidth="220.0" spacing="10.0" styleClass="menu_container">
+        <VBox alignment="CENTER" prefHeight="413.0" prefWidth="220.0" spacing="10.0" styleClass="menu_container">
             <children>
-                <Button fx:id="btnRooms" prefWidth="220.0" styleClass="menu_button" text="Display Rooms" />
                 <Button fx:id="btnFurniture" styleClass="menu_button" text="View Furniture" />
-                <Button fx:id="btnOccupants" styleClass="menu_button" text="Manage Occupants" />
-                <Button fx:id="btnReport" prefHeight="38.0" prefWidth="225.0" styleClass="menu_button" text="Generate Report" />
-                <Button fx:id="btnAccount" prefWidth="89.0" styleClass="menu_button" text="Account" />
             </children>
         </VBox>
-        <AnchorPane prefHeight="303.0" prefWidth="220.0">
-            <children>
+        <AnchorPane prefHeight="166.0" prefWidth="220.0">
+         <children>
 
                 <!-- Sign Out Button -->
-                <Button fx:id="btnSignOut" layoutY="247.0" prefWidth="109.0" styleClass="signout_button" text="Sign Out" AnchorPane.bottomAnchor="13.5" />
-            </children>
+                <Button fx:id="btnSignOut" layoutY="237.0" prefWidth="109.0" styleClass="signout_button" text="Sign Out" />
+         </children>
         </AnchorPane>
     </children>
 </VBox>
