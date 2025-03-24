@@ -51,6 +51,10 @@ public class Furniture {
         return furnitureCondition;
     }
 
+    public StringProperty getRoomNumberProperty() {
+        return Room.getRoom(getRoomID()).roomNumberProperty();
+    }
+
     // Getters
     public Integer getID() {
         return id.get();

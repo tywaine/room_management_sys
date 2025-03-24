@@ -52,11 +52,11 @@
          <TableColumn fx:id="columnIdNumber" prefWidth="95.0" text="ID Number" />
          <TableColumn fx:id="columnFirstName" prefWidth="162.0" text="First Name" />
          <TableColumn fx:id="columnLastName" prefWidth="153.0" text="Last Name" />
-         <TableColumn fx:id="columnEmail" prefWidth="208.0" text="Email" />
-         <TableColumn fx:id="columnPhoneNumber" prefWidth="111.0" text="Phone Number" />
-         <TableColumn fx:id="columnDateAdded" prefWidth="156.0" text="Date Added" />
-         <TableColumn fx:id="columnEdit" prefWidth="38.0" text="Edit" />
-         <TableColumn fx:id="columnDelete" prefWidth="48.0" text="Delete" />
+         <TableColumn fx:id="columnEmail" prefWidth="201.0" text="Email" />
+         <TableColumn fx:id="columnPhoneNumber" prefWidth="109.0" text="Phone Number" />
+         <TableColumn fx:id="columnDateAdded" prefWidth="165.0" text="Date Added" />
+         <TableColumn fx:id="columnEdit" prefWidth="37.0" text="Edit" />
+         <TableColumn fx:id="columnDelete" prefWidth="49.0" text="Delete" />
       </columns>
    </TableView>
    <!-- ListView for Room Numbers -->
@@ -107,5 +107,6 @@
          <Font name="System Bold Italic" size="8.0" />
       </font>
    </Label>
+   <Button fx:id="btnShowAllOccupants" layoutX="958.0" layoutY="95.0" onAction="#showAllOccupantsView" text="Show All Occupants" AnchorPane.rightAnchor="14.5" AnchorPane.topAnchor="95.0" />
 
 </AnchorPane>

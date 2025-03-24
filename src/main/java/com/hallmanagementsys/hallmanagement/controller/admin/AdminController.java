@@ -19,6 +19,8 @@ public class AdminController implements Initializable {
                         case OCCUPANTS -> adminParent.setCenter(ViewFactory.getInstance().getManageOccupantsView());
                         case REPORT -> adminParent.setCenter(ViewFactory.getInstance().getGenerateReportView());
                         case ACCOUNT -> adminParent.setCenter(ViewFactory.getInstance().getAccountView());
+                        case ALL_FURNITURE -> adminParent.setCenter(ViewFactory.getInstance().getAllFurnitureView());
+                        case ALL_OCCUPANTS -> adminParent.setCenter(ViewFactory.getInstance().getAllOccupantsView());
                         default -> adminParent.setCenter(ViewFactory.getInstance().getDisplayRoomsView());
                     }
                 }

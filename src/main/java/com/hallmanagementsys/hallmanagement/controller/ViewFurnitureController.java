@@ -2,6 +2,7 @@ package com.hallmanagementsys.hallmanagement.controller;
 
 import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureDeleteMessage;
 import com.hallmanagementsys.hallmanagement.dto.msg.FurnitureUpdateMessage;
+import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Furniture;
 import com.hallmanagementsys.hallmanagement.model.Room;
 import com.hallmanagementsys.hallmanagement.service.FurnitureService;
@@ -32,6 +33,7 @@ public class ViewFurnitureController implements Initializable {
     public Button btnAddFurniture;
     public TextField txtSearchRoom, txtSearchFurniture, txtRoomNumber;
     public ChoiceBox<String> choiceBoxCondition, choiceBoxType;
+    public Button btnShowAllFurniture;
 
     private FilteredList<Room> filteredRoomList;
     private Room selectedRoom;
@@ -360,5 +362,9 @@ public class ViewFurnitureController implements Initializable {
                     "Furniture type " + furnitureType + " with a " + furnitureCondition +
                             " condition" + " was not added to room " + selectedRoom.getRoomNumber() + "!!!");
         }
+    }
+
+    public void showAllFurnitureView() {
+        ViewFactory.getInstance().getAdminSelectedMenuItem().set(AdminMenuOptions.ALL_FURNITURE);
     }
 }

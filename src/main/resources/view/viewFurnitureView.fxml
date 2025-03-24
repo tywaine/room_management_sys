@@ -26,7 +26,7 @@
          <Font name="System Bold" size="32.0" />
       </font>
    </Label>
-   <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="857.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="105.0">
+   <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="857.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="104.0">
       <image>
          <Image url="@../img/searchgrey.png" />
       </image>
@@ -64,5 +64,6 @@
       </TableView>
       <!-- ListView for Room Numbers -->
       <ListView fx:id="listViewRooms" layoutX="14.0" layoutY="145.0" prefHeight="610.0" prefWidth="120.0" AnchorPane.bottomAnchor="145.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="145.0" />
+   <Button fx:id="btnShowAllFurniture" layoutX="495.0" layoutY="94.0" onAction="#showAllFurnitureView" text="Show All Furniture" AnchorPane.topAnchor="94.0" />
 
 </AnchorPane>

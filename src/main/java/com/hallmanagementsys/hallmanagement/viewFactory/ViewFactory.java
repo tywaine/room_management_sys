@@ -32,6 +32,7 @@ public class ViewFactory {
     private AnchorPane displayRoomsView;
     private AnchorPane generateReportView;
     private AnchorPane manageOccupantsView;
+    private AnchorPane allOccupantsView;
 
     //Staff View
     private final ObjectProperty<StaffMenuOptions> staffSelectedMenuItem;
@@ -39,6 +40,7 @@ public class ViewFactory {
     //Shared Views
     private AnchorPane accountView;
     private AnchorPane viewFurnitureView;
+    private AnchorPane allFurnitureView;
 
     private static ViewFactory instance;
 
@@ -124,11 +126,37 @@ public class ViewFactory {
         return viewFurnitureView;
     }
 
+    public AnchorPane getAllFurnitureView() {
+        if(allFurnitureView == null){
+            try{
+                allFurnitureView = new FXMLLoader(getClass().getResource("/view/allFurnitureView.fxml")).load();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        return allFurnitureView;
+    }
+
+    public AnchorPane getAllOccupantsView() {
+        if(allOccupantsView == null){
+            try{
+                allOccupantsView = new FXMLLoader(getClass().getResource("/view/admin/allOccupantsView.fxml")).load();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        return allOccupantsView;
+    }
+
     public void resetAdminViews(){
         displayRoomsView = null;
         viewFurnitureView = null;
         manageOccupantsView = null;
         generateReportView = null;
+        allFurnitureView = null;
+        allOccupantsView = null;
         accountView = null;
     }
 
@@ -137,6 +165,7 @@ public class ViewFactory {
         viewFurnitureView = null;
         manageOccupantsView = null;
         generateReportView = null;
+        allFurnitureView = null;
         accountView = null;
     }
 
@@ -311,6 +340,7 @@ public class ViewFactory {
     private void onExit() {
         System.out.println("Application is closing...");
         MyWebSocketClient.getInstance().disconnect();
+        System.exit(0);
     }
 
     public void closeStage(Stage stage){

@@ -203,3 +203,26 @@
 .button {
     -fx-background-insets: 0;
 }
+
+#btnShowAllFurniture {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #212121;
+    -fx-font-size: 14px;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 0, 0, 0, 2);
+    -fx-background-insets: 0;
+    -fx-border-color: #bdbdbd;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+}
+
+#btnShowAllFurniture:hover {
+    -fx-background-color: #d6d6d6;
+}
+
+#btnShowAllFurniture:pressed {
+    -fx-background-color: #bcbcbc;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 0, 0, 0, 1);
+}

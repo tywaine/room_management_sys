@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1125.0" stylesheets="@../css/displayRooms.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hallmanagementsys.hallmanagement.controller.AllFurnitureController">
+    <children>
+        <TableView fx:id="tableViewFurniture" layoutX="27.0" layoutY="135.0" prefHeight="765.0" prefWidth="1123.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="135.0">
+            <columns>
+                <TableColumn fx:id="columnRoomNumber" prefWidth="276.0" text="Room Number" />
+                <TableColumn fx:id="columnFurnitureId" minWidth="3.0" prefWidth="280.0" text="Furniture ID" />
+                <TableColumn fx:id="columnFurnitureType" prefWidth="291.0" text="Furniture Type" />
+                <TableColumn fx:id="columnFurnitureCondition" prefWidth="236.0" text="Furniture Condition" />
+            </columns>
+        </TableView>
+        <Label alignment="CENTER" layoutX="548.0" layoutY="14.0" prefHeight="17.0" prefWidth="529.0" text="All Furniture" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font name="Arial Bold" size="32.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtSearch" layoutX="14.0" layoutY="79.0" prefHeight="42.0" prefWidth="240.0" promptText="Search" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="79.0" />
+        <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="22.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="92.0">
+            <image>
+                <Image url="@../img/searchgrey.png" />
+            </image>
+        </ImageView>
+      <Button fx:id="btnBack" layoutX="532.0" layoutY="82.0" mnemonicParsing="false" onAction="#showViewFurnitureView" text="Back" AnchorPane.topAnchor="82.0" />
+      <Separator layoutX="446.0" layoutY="50.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    </children>
+</AnchorPane>

@@ -2,6 +2,7 @@ package com.hallmanagementsys.hallmanagement.controller.admin;
 
 import com.hallmanagementsys.hallmanagement.dto.msg.OccupantDeleteMessage;
 import com.hallmanagementsys.hallmanagement.dto.msg.OccupantUpdateMessage;
+import com.hallmanagementsys.hallmanagement.enums.AdminMenuOptions;
 import com.hallmanagementsys.hallmanagement.model.Occupant;
 import com.hallmanagementsys.hallmanagement.model.Room;
 import com.hallmanagementsys.hallmanagement.service.OccupantService;
@@ -37,6 +38,7 @@ public class ManageOccupantsController implements Initializable {
     public Label lblIdNumberError, lblFirstNameError, lblLastNameError, lblEmailError, lblPhoneNumberError;
     public Label lblMaxOccupants;
     public Button btnAddOccupant;
+    public Button btnShowAllOccupants;
 
     private FilteredList<Room> filteredRoomList;
     private Room selectedRoom;
@@ -99,14 +101,7 @@ public class ManageOccupantsController implements Initializable {
             // Check and make sure occupant with the same id is not in the occupantList
             // If it is not then occupant will be null
             if(occupant == null){
-                Occupant newOccupant = Occupant.fromDTO(message.getOccupant());
-
-                /*
-                if(selectedRoom != null && selectedRoom.getID().equals(newOccupant.getRoomID())){
-                    occupantList.add(newOccupant);
-                }
-
-                 */
+                Occupant.fromDTO(message.getOccupant());
             }
             else{
                 System.out.println("Occupant already exists");
@@ -137,13 +132,6 @@ public class ManageOccupantsController implements Initializable {
 
         if(occupant != null){
             Occupant.removeOccupant(occupant);
-
-            /*
-            if(selectedRoom != null && selectedRoom.getID().equals(occupant.getRoomID())){
-                occupantList.remove(occupant);
-            }
-
-             */
         }
         else{
             System.out.println("Occupant was already deleted.");
@@ -243,7 +231,6 @@ public class ManageOccupantsController implements Initializable {
 
             if(occupantService.deleteOccupant(occupant.getID())){
                 Occupant.removeOccupant(occupant);
-                //occupantList.remove(occupant);
                 MyAlert.showAlert(Alert.AlertType.INFORMATION, "Deleted Occupant",
                         "Occupant with id Number " + occupant.getIdNumber() + " in room " + selectedRoom.getRoomNumber()
                                 + " has been deleted!!");
@@ -465,7 +452,6 @@ public class ManageOccupantsController implements Initializable {
         Occupant occupant = occupantService.createOccupant(newOccupant);
 
         if(occupant != null){
-            //occupantList.add(occupant);
             clearFields();
             MyAlert.showAlert(Alert.AlertType.INFORMATION, "Added Occupant",
                     "Successfully added occupant to room number " + selectedRoom.getRoomNumber() + "!");
@@ -474,5 +460,9 @@ public class ManageOccupantsController implements Initializable {
             MyAlert.showAlert(Alert.AlertType.ERROR, "Error Adding Occupant",
                     "Occupant was not added to room number " + selectedRoom.getRoomNumber() + "!!!");
         }
+    }
+
+    public void showAllOccupantsView() {
+        ViewFactory.getInstance().getAdminSelectedMenuItem().set(AdminMenuOptions.ALL_OCCUPANTS);
     }
 }

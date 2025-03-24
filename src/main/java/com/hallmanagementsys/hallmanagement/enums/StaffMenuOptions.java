@@ -5,7 +5,8 @@ public enum StaffMenuOptions {
     OCCUPANTS("Occupants"),
     REPORT("Report"),
     FURNITURE("Furniture"),
-    ACCOUNT("Account");
+    ACCOUNT("Account"),
+    ALL_FURNITURE("Show All Furniture");
 
     StaffMenuOptions(String description) {}
 }

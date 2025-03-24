@@ -19,6 +19,7 @@ public class StaffController implements Initializable {
                         case OCCUPANTS -> staffParent.setCenter(ViewFactory.getInstance().getManageOccupantsView());
                         case REPORT -> staffParent.setCenter(ViewFactory.getInstance().getGenerateReportView());
                         case ACCOUNT -> staffParent.setCenter(ViewFactory.getInstance().getAccountView());
+                        case ALL_FURNITURE -> staffParent.setCenter(ViewFactory.getInstance().getAllFurnitureView());
                         default -> staffParent.setCenter(ViewFactory.getInstance().getDisplayRoomsView());
                     }
                 }

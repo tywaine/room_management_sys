@@ -5,7 +5,9 @@ public enum AdminMenuOptions {
     OCCUPANTS("Occupants"),
     REPORT("Report"),
     FURNITURE("Furniture"),
-    ACCOUNT("Account");
+    ACCOUNT("Account"),
+    ALL_FURNITURE("Show All Furniture"),
+    ALL_OCCUPANTS("Show All Occupants");
 
     AdminMenuOptions(String description) {}
 }
