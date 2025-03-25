@@ -32,7 +32,7 @@
                 <Image url="@../img/searchgrey.png" />
             </image>
         </ImageView>
-      <Button fx:id="btnBack" layoutX="532.0" layoutY="82.0" mnemonicParsing="false" onAction="#showViewFurnitureView" text="Back" AnchorPane.topAnchor="82.0" />
+      <Button fx:id="btnBack" layoutX="1047.0" layoutY="82.0" mnemonicParsing="false" onAction="#showViewFurnitureView" text="Back" AnchorPane.rightAnchor="14.5" AnchorPane.topAnchor="82.0" />
       <Separator layoutX="446.0" layoutY="50.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
     </children>
 </AnchorPane>

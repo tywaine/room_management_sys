@@ -10,8 +10,4 @@ public class MyUrl {
         return API_URL;
         //return LOCALHOST_API_URL;
     }
-
-    public static String getTestUrl(){
-        return TEST_API_URL;
-    }
 }
